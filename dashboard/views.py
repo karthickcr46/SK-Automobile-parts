@@ -586,6 +586,7 @@ def order_detail(request, order_id):
             )
 
             if not delivery_person_id:
+
                 messages.error(
                     request,
                     'Please select a delivery person.'
@@ -622,8 +623,10 @@ def order_detail(request, order_id):
 
                 if order.status == 'out_for_delivery':
                     delivery.status = 'out_for_delivery'
+
                 elif delivery.status == 'delivered':
                     delivery.status = 'delivered'
+
                 else:
                     delivery.status = 'assigned'
 
@@ -842,7 +845,11 @@ def order_detail(request, order_id):
                         recipient_list=[
                             order.customer.email
                         ],
-                        fail_silently=False,
+
+                        # IMPORTANT:
+                        # Do not allow SMTP failure to break
+                        # the order-status operation.
+                        fail_silently=True,
                     )
 
         # =================================================
