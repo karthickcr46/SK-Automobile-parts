@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shops - SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #172337;
+            color: white;
+            padding-top: 25px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 25px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2874f0;
+            color: white;
+        }
+
+        .sidebar a.active {
+            background: #2874f0;
+            color: white;
+        }
+
+        /* Main */
+        .main {
+            margin-left: 240px;
+            padding: 25px;
+        }
+
+        /* Top bar */
+        .topbar {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .add-btn {
+            background: #2874f0;
+            color: white;
+            padding: 11px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .add-btn:hover {
+            background: #1258c7;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        /* Status */
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .accept {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .not-accept {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        /* Action buttons */
+        .edit-btn {
+            background: #2874f0;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .edit-btn:hover {
+            background: #1258c7;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 13px;
+            margin-left: 5px;
+        }
+
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+        /* Empty */
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>SK Automobile Parts</h2>
+
+        <a href="{% url 'dashboard_home' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'admin_products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'admin_categories' %}">
+            Categories
+        </a>
+
+        <a href="{% url 'admin_shops' %}" class="active">
+            Shops
+        </a>
+
+        <a href="#">
+            Orders
+        </a>
+
+        <a href="#">
+            Customers
+        </a>
+
+        <a href="#">
+            Payments
+        </a>
+
+        <a href="{% url 'admin_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+
+            <h1>Shops</h1>
+
+            <a
+                href="{% url 'shop_add' %}"
+                class="add-btn"
+            >
+                + Add Shop
+            </a>
+
+        </div>
+
+
+        <!-- Shops Table -->
+        <div class="table-container">
+
+            {% if shops %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Shop Name</th>
+                            <th>Owner</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Location</th>
+                            <th>Shop Status</th>
+                            <th>Orders</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for shop in shops %}
+
+                            <tr>
+
+                                <td>
+                                    {{ shop.id }}
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        {{ shop.name }}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    {{ shop.owner.username }}
+                                </td>
+
+                                <td>
+                                    {{ shop.phone }}
+                                </td>
+
+                                <td>
+                                    {{ shop.city }}
+                                </td>
+
+                                <td>
+                                    {{ shop.latitude }},
+                                    {{ shop.longitude }}
+                                </td>
+
+                                <td>
+
+                                    {% if shop.is_open %}
+
+                                        <span class="status open">
+                                            Open
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status closed">
+                                            Closed
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    {% if shop.accepts_orders %}
+
+                                        <span class="status accept">
+                                            Accepting
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status not-accept">
+                                            Not Accepting
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    <a
+                                        href="{% url 'shop_edit' shop.id %}"
+                                        class="edit-btn"
+                                    >
+                                        Edit
+                                    </a>
+
+                                    <a
+                                        href="{% url 'shop_delete' shop.id %}"
+                                        class="delete-btn"
+                                    >
+                                        Delete
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <div class="empty">
+
+                    <h3>No Shops Added Yet</h3>
+
+                    <p>
+                        Add your first mechanic or auto-parts
+                        shop to start building the delivery network.
+                    </p>
+
+                    <a
+                        href="{% url 'shop_add' %}"
+                        class="add-btn"
+                    >
+                        + Add First Shop
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

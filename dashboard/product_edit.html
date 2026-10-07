@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Edit Product - SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #172337;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 14px 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .menu a:hover,
+        .menu .active {
+            background: #2874f0;
+        }
+
+        .main {
+            flex: 1;
+        }
+
+        .topbar {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .topbar h2 {
+            color: #172337;
+        }
+
+        .logout {
+            background: #e53935;
+            color: white;
+            padding: 9px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .back-btn {
+            color: #2874f0;
+            text-decoration: none;
+        }
+
+        .form-box {
+            background: white;
+            max-width: 800px;
+            margin-top: 25px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .form-box h1 {
+            color: #172337;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 18px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .current-image {
+            margin-top: 10px;
+        }
+
+        .current-image img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .checkbox {
+            margin-top: 20px;
+        }
+
+        .checkbox input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .update-btn {
+            background: #2874f0;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #777;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 8px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            SK Automobile Parts
+        </div>
+
+        <div class="menu">
+
+            <a href="{% url 'dashboard_home' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'admin_products' %}" class="active">
+                Products
+            </a>
+
+            <a href="{% url 'admin_categories' %}">
+                Categories
+            </a>
+
+            <a href="#">
+                Orders
+            </a>
+
+            <a href="#">
+                Customers
+            </a>
+
+            <a href="#">
+                Payments
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <h2>
+                Products Management
+            </h2>
+
+            <div>
+
+                Welcome, {{ request.user.username }}
+
+                &nbsp;&nbsp;
+
+                <a
+                    href="{% url 'admin_logout' %}"
+                    class="logout"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <section class="content">
+
+            <a
+                href="{% url 'admin_products' %}"
+                class="back-btn"
+            >
+                ← Back to Products
+            </a>
+
+
+            <div class="form-box">
+
+                <h1>
+                    Edit Product
+                </h1>
+
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select name="category" required>
+
+                        {% for category in categories %}
+
+                            <option
+                                value="{{ category.id }}"
+                                {% if category.id == product.category.id %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ category.name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+                    <label>
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ product.name }}"
+                        required
+                    >
+
+
+                    <label>
+                        Brand
+                    </label>
+
+                    <input
+                        type="text"
+                        name="brand"
+                        value="{{ product.brand }}"
+                        required
+                    >
+
+
+                    <label>
+                        Part Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="part_number"
+                        value="{{ product.part_number }}"
+                        required
+                    >
+
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="5"
+                        required
+                    >{{ product.description }}</textarea>
+
+
+                    <label>
+                        Price
+                    </label>
+
+                    <input
+                        type="number"
+                        name="price"
+                        value="{{ product.price }}"
+                        step="0.01"
+                        required
+                    >
+
+
+                    <label>
+                        Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        name="stock"
+                        value="{{ product.stock }}"
+                        min="0"
+                        required
+                    >
+
+
+                    <label>
+                        Vehicle Compatibility
+                    </label>
+
+                    <input
+                        type="text"
+                        name="compatibility"
+                        value="{{ product.compatibility }}"
+                    >
+
+
+                    {% if product.image %}
+
+                        <div class="current-image">
+
+                            <label>
+                                Current Image
+                            </label>
+
+                            <img
+                                src="{{ product.image.url }}"
+                                alt="{{ product.name }}"
+                            >
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <label>
+                        Change Product Image
+                    </label>
+
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                    >
+
+
+                    <div class="checkbox">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                name="is_active"
+                                {% if product.is_active %}
+                                    checked
+                                {% endif %}
+                            >
+
+                            Active Product
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="buttons">
+
+                        <button
+                            type="submit"
+                            class="update-btn"
+                        >
+                            Update Product
+                        </button>
+
+                        <a
+                            href="{% url 'admin_products' %}"
+                            class="cancel-btn"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

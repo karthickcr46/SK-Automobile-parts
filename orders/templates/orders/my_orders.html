@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #111827;
+            color: white;
+            padding: 16px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* PAGE */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 30px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* ORDER CARD */
+
+        .order-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .order-top {
+            padding: 18px 22px;
+            background: #fafafa;
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .order-number {
+            font-weight: 700;
+            color: #111827;
+            font-size: 16px;
+        }
+
+        .order-date {
+            margin-top: 6px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* STATUS */
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .status-confirmed {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-preparing {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .status-out_for_delivery {
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+
+        .status-delivered {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-cancelled {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        /* ORDER BODY */
+
+        .order-body {
+            padding: 20px 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .order-info {
+            display: flex;
+            gap: 45px;
+            flex-wrap: wrap;
+        }
+
+        .info-item span {
+            display: block;
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .info-item strong {
+            color: #111827;
+            font-size: 15px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #111827;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .view-btn:hover {
+            background: #000;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-orders {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 18px;
+        }
+
+        .empty-orders h2 {
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .empty-orders p {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #111827;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .page-header h1 {
+                font-size: 25px;
+            }
+
+            .order-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .order-body {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .order-info {
+                gap: 20px;
+            }
+
+            .view-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            SK Automobile Parts
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'shop' %}">
+                Shop
+            </a>
+
+            <a href="{% url 'cart_view' %}">
+                Cart
+            </a>
+
+            <a href="{% url 'my_orders' %}">
+                My Orders
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h1>
+                My Orders
+            </h1>
+
+            <p>
+                View and track all your SK Automobile Parts orders.
+            </p>
+
+        </div>
+
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+                <div class="order-card">
+
+                    <!-- ORDER HEADER -->
+
+                    <div class="order-top">
+
+                        <div>
+
+                            <div class="order-number">
+                                Order #{{ order.order_number }}
+                            </div>
+
+                            <div class="order-date">
+                                Placed on
+                                {{ order.created_at|date:"d M Y, h:i A" }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="status status-{{ order.status }}">
+                            {{ order.get_status_display }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- ORDER DETAILS -->
+
+                    <div class="order-body">
+
+                        <div class="order-info">
+
+                            <div class="info-item">
+
+                                <span>
+                                    Total Amount
+                                </span>
+
+                                <strong>
+                                    ₹{{ order.total_amount }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <span>
+                                    Items
+                                </span>
+
+                                <strong>
+                                    {{ order.items.count }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <span>
+                                    Payment
+                                </span>
+
+                                <strong>
+                                    {% if order.payment %}
+                                        {{ order.payment.get_payment_method_display }}
+                                    {% else %}
+                                        Pending
+                                    {% endif %}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'order_detail' order.id %}"
+                            class="view-btn"
+                        >
+                            View Order
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-orders">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No orders yet
+                </h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                    Start shopping for your vehicle parts.
+                </p>
+
+                <a
+                    href="{% url 'shop' %}"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

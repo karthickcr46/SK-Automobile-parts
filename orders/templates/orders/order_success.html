@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Confirmed | SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            color: #222;
+        }
+
+        .navbar {
+            background: #111827;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 50px auto;
+        }
+
+        .success-card {
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #15803d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .message {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .order-details {
+            text-align: left;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #6b7280;
+        }
+
+        .value {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .status {
+            color: #15803d;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #111827;
+            color: white;
+        }
+
+        .secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .items {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .items h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        @media (max-width: 600px) {
+            .success-card {
+                padding: 25px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        SK Automobile Parts
+    </div>
+
+    <div>
+        <a href="{% url 'shop' %}" class="nav-link">Shop</a>
+        <a href="{% url 'cart_view' %}" class="nav-link">Cart</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1>Order Confirmed!</h1>
+
+        <p class="message">
+            Thank you for shopping with SK Automobile Parts.
+            Your order has been successfully placed.
+        </p>
+
+
+        <div class="order-details">
+
+            <div class="detail-row">
+                <span class="label">
+                    Order Number
+                </span>
+
+                <span class="value">
+                    {{ order.order_number }}
+                </span>
+            </div>
+
+
+            <div class="detail-row">
+                <span class="label">
+                    Order Status
+                </span>
+
+                <span class="value status">
+                    {{ order.get_status_display }}
+                </span>
+            </div>
+
+
+            <div class="detail-row">
+                <span class="label">
+                    Total Amount
+                </span>
+
+                <span class="value">
+                    ₹{{ order.total_amount }}
+                </span>
+            </div>
+
+
+            <div class="detail-row">
+                <span class="label">
+                    Phone
+                </span>
+
+                <span class="value">
+                    {{ order.phone }}
+                </span>
+            </div>
+
+
+            <div class="detail-row">
+                <span class="label">
+                    Delivery Address
+                </span>
+
+                <span class="value">
+                    {{ order.shipping_address }}
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="items">
+
+            <h2>Ordered Items</h2>
+
+            {% for item in order.items.all %}
+
+                <div class="item">
+
+                    <span>
+                        {{ item.product.name }}
+                        × {{ item.quantity }}
+                    </span>
+
+                    <strong>
+                        ₹{{ item.subtotal }}
+                    </strong>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a
+                href="{% url 'shop' %}"
+                class="button primary"
+            >
+                Continue Shopping
+            </a>
+
+            <a
+                href="{% url 'home' %}"
+                class="button secondary"
+            >
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

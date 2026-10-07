@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Login | SK Automobile Parts
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+        }
+
+
+        .login-container {
+            width: 100%;
+
+            max-width: 420px;
+
+            padding: 20px;
+        }
+
+
+        .login-card {
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+        }
+
+
+        .logo {
+            text-align: center;
+
+            font-size: 42px;
+
+            margin-bottom: 10px;
+        }
+
+
+        h1 {
+            text-align: center;
+
+            color: #111827;
+
+            font-size: 26px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .subtitle {
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        input {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.12
+                );
+        }
+
+
+        .login-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .login-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        .error-message {
+            background: #fef2f2;
+
+            border:
+                1px solid #fecaca;
+
+            color: #b91c1c;
+
+            padding: 11px 13px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .back-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+
+        .admin-note {
+            margin-top: 22px;
+
+            padding: 12px;
+
+            background: #f3f4f6;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+
+            <div class="logo">
+                🛠️
+            </div>
+
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+
+            <p class="subtitle">
+                SK Automobile Parts
+            </p>
+
+
+            {% if error %}
+
+                <div class="error-message">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter admin username"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter admin password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login to Dashboard
+                </button>
+
+            </form>
+
+
+            <a
+                href="{% url 'home' %}"
+                class="back-link"
+            >
+                ← Back to Customer Website
+            </a>
+
+
+            <div class="admin-note">
+
+                🔐 Authorized administrators only.
+
+                <br>
+
+                Manage products, orders,
+                customers and deliveries.
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

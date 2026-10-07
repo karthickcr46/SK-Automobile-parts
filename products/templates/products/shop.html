@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shop Auto Parts | SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            color: #212121;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #172337;
+            color: white;
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-box form {
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            border: none;
+            background: #2874f0;
+            color: white;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background: #1257c7;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Notification Badge */
+
+        .notification-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 19px;
+            height: 19px;
+            padding: 0 5px;
+            margin-left: 4px;
+            border-radius: 10px;
+            background: #e53935;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            line-height: 1;
+            vertical-align: middle;
+        }
+
+        /* =========================
+           CATEGORY NAVIGATION
+        ========================= */
+
+        .category-nav {
+            background: white;
+            padding: 14px 5%;
+            display: flex;
+            gap: 30px;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .category-nav a {
+            color: #333;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .category-nav a:hover {
+            color: #2874f0;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            background: white;
+            padding: 30px 5%;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-header h1 {
+            color: #172337;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #666;
+        }
+
+        /* =========================
+           MAIN SHOP CONTAINER
+        ========================= */
+
+        .shop-container {
+            width: 1200px;
+            max-width: 90%;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 25px;
+        }
+
+        /* =========================
+           FILTER FORM
+        ========================= */
+
+        .filter-form {
+            width: 100%;
+        }
+
+        /* =========================
+           FILTER SIDEBAR
+        ========================= */
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .filters h3 {
+            color: #172337;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-group:last-child {
+            border-bottom: none;
+        }
+
+        .filter-group h4 {
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter-group input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .clear-filters {
+            display: inline-block;
+            margin-top: 15px;
+            color: #2874f0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .clear-filters:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           PRODUCTS AREA
+        ========================= */
+
+        .products-area {
+            min-width: 0;
+        }
+
+        .products-header {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .products-count {
+            color: #555;
+        }
+
+        /* =========================
+           SORT FORM
+        ========================= */
+
+        .sort-form {
+            margin: 0;
+        }
+
+        .sort-select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
+
+        .sort-select:hover,
+        .sort-select:focus {
+            border-color: #2874f0;
+        }
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            height: 200px;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .no-image {
+            color: #999;
+        }
+
+        .product-content {
+            padding: 16px;
+        }
+
+        .product-name {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .product-name a {
+            color: #172337;
+            font-weight: 600;
+        }
+
+        .product-name a:hover {
+            color: #2874f0;
+        }
+
+        .brand {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .compatibility {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.4;
+            min-height: 36px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #172337;
+            margin-bottom: 8px;
+        }
+
+        .stock {
+            font-size: 13px;
+            color: #168a16;
+            margin-bottom: 14px;
+        }
+
+        .out-of-stock {
+            color: #d32f2f;
+        }
+
+        /* =========================
+           PRODUCT BUTTONS
+        ========================= */
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn,
+        .cart-btn {
+            flex: 1;
+            padding: 10px 8px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .view-btn {
+            background: #2874f0;
+            color: white;
+        }
+
+        .view-btn:hover {
+            background: #1257c7;
+        }
+
+        .cart-btn {
+            background: #ff9f00;
+            color: white;
+        }
+
+        .cart-btn:hover {
+            background: #fb8c00;
+        }
+
+        /* =========================
+           NO PRODUCTS
+        ========================= */
+
+        .no-products {
+            background: white;
+            padding: 60px 30px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .no-products h2 {
+            margin-bottom: 10px;
+        }
+
+        .no-products p {
+            color: #666;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+
+            .shop-container {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .category-nav {
+                padding: 12px 20px;
+                gap: 20px;
+            }
+
+            .page-header {
+                padding: 25px 20px;
+            }
+
+            .shop-container {
+                max-width: calc(100% - 30px);
+                margin: 20px auto;
+            }
+
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .sort-form {
+                width: 100%;
+            }
+
+            .sort-select {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            SK Automobile Parts
+        </div>
+
+        <div class="search-box">
+
+            <form method="get">
+
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Search auto parts, brands or part numbers..."
+                    value="{{ search_query }}"
+                >
+
+                <button type="submit">
+                    🔍
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- =========================
+             AUTHENTICATED NAVIGATION
+        ========================= -->
+
+        <div class="nav-links">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'my_orders' %}">
+                    My Orders
+                </a>
+
+                <a href="{% url 'notifications' %}">
+                    🔔 Notifications
+
+                    {% if unread_notification_count > 0 %}
+                        <span class="notification-badge">
+                            {{ unread_notification_count }}
+                        </span>
+                    {% endif %}
+                </a>
+
+                <a href="{% url 'cart_view' %}">
+                    🛒 Cart
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'cart_view' %}">
+                    🛒 Cart
+                </a>
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+    <!-- =========================
+         CATEGORY NAVIGATION
+    ========================= -->
+
+    <div class="category-nav">
+
+        <a href="{% url 'shop' %}">
+            All Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Brake%20System">
+            Brake System
+        </a>
+
+        <a href="{% url 'shop' %}?category=Chain%20%26%20Sprocket">
+            Chain & Sprocket
+        </a>
+
+        <a href="{% url 'shop' %}?category=Electrical%20Parts">
+            Electrical Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Clutch%20Parts">
+            Clutch Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Service%20Parts">
+            Service Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Body%20Parts">
+            Body Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Lighting">
+            Lighting
+        </a>
+
+        <a href="{% url 'shop' %}?category=Accessories">
+            Accessories
+        </a>
+
+    </div>
+
+    <!-- =========================
+         PAGE HEADER
+    ========================= -->
+
+    <section class="page-header">
+
+        <h1>
+            Auto Parts
+        </h1>
+
+        <p>
+            Find genuine and quality spare parts for your motorcycle.
+        </p>
+
+    </section>
+
+    <!-- =========================
+         SHOP CONTENT
+    ========================= -->
+
+    <div class="shop-container">
+
+        <!-- =========================
+             FILTER FORM
+        ========================= -->
+
+        <form method="get" class="filter-form">
+
+            <aside class="filters">
+
+                <h3>
+                    Filters
+                </h3>
+
+                <!-- Preserve Search -->
+
+                {% if search_query %}
+
+                    <input
+                        type="hidden"
+                        name="q"
+                        value="{{ search_query }}"
+                    >
+
+                {% endif %}
+
+                <!-- Preserve Category -->
+
+                {% if category_name %}
+
+                    <input
+                        type="hidden"
+                        name="category"
+                        value="{{ category_name }}"
+                    >
+
+                {% endif %}
+
+                <!-- =========================
+                     AVAILABILITY
+                ========================= -->
+
+                <div class="filter-group">
+
+                    <h4>
+                        Availability
+                    </h4>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            name="in_stock"
+                            value="1"
+                            {% if in_stock == '1' %}checked{% endif %}
+                            onchange="this.form.submit()"
+                        >
+
+                        In Stock
+
+                    </label>
+
+                </div>
+
+                <!-- =========================
+                     CATEGORIES
+                ========================= -->
+
+                <div class="filter-group">
+
+                    <h4>
+                        Categories
+                    </h4>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            {% if category_name == 'Brake System' %}checked{% endif %}
+                            onchange="window.location.href='{% url 'shop' %}?category=Brake%20System'"
+                        >
+
+                        Brake System
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            {% if category_name == 'Electrical Parts' %}checked{% endif %}
+                            onchange="window.location.href='{% url 'shop' %}?category=Electrical%20Parts'"
+                        >
+
+                        Electrical Parts
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            {% if category_name == 'Chain & Sprocket' %}checked{% endif %}
+                            onchange="window.location.href='{% url 'shop' %}?category=Chain%20%26%20Sprocket'"
+                        >
+
+                        Chain & Sprocket
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            {% if category_name == 'Clutch Parts' %}checked{% endif %}
+                            onchange="window.location.href='{% url 'shop' %}?category=Clutch%20Parts'"
+                        >
+
+                        Clutch Parts
+
+                    </label>
+
+                </div>
+
+                <!-- =========================
+                     PRODUCT TYPE
+                ========================= -->
+
+                <div class="filter-group">
+
+                    <h4>
+                        Product Type
+                    </h4>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            {% if category_name == 'Service Parts' %}checked{% endif %}
+                            onchange="window.location.href='{% url 'shop' %}?category=Service%20Parts'"
+                        >
+
+                        Service Parts
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            {% if category_name == 'Accessories' %}checked{% endif %}
+                            onchange="window.location.href='{% url 'shop' %}?category=Accessories'"
+                        >
+
+                        Accessories
+
+                    </label>
+
+                </div>
+
+                <!-- =========================
+                     CLEAR FILTERS
+                ========================= -->
+
+                <a
+                    href="{% url 'shop' %}"
+                    class="clear-filters"
+                >
+                    Clear Filters
+                </a>
+
+            </aside>
+
+        </form>
+
+        <!-- =========================
+             PRODUCTS
+        ========================= -->
+
+        <main class="products-area">
+
+            <div class="products-header">
+
+                <div class="products-count">
+                    {{ products|length }} products
+                </div>
+
+                <!-- =========================
+                     SORT FORM
+                ========================= -->
+
+                <form method="get" class="sort-form">
+
+                    {% if search_query %}
+
+                        <input
+                            type="hidden"
+                            name="q"
+                            value="{{ search_query }}"
+                        >
+
+                    {% endif %}
+
+                    {% if category_name %}
+
+                        <input
+                            type="hidden"
+                            name="category"
+                            value="{{ category_name }}"
+                        >
+
+                    {% endif %}
+
+                    {% if in_stock == '1' %}
+
+                        <input
+                            type="hidden"
+                            name="in_stock"
+                            value="1"
+                        >
+
+                    {% endif %}
+
+                    <select
+                        name="sort"
+                        class="sort-select"
+                        onchange="this.form.submit()"
+                    >
+
+                        <option
+                            value="popular"
+                            {% if sort == 'popular' %}selected{% endif %}
+                        >
+                            Sort by: Popular
+                        </option>
+
+                        <option
+                            value="price_low"
+                            {% if sort == 'price_low' %}selected{% endif %}
+                        >
+                            Price: Low to High
+                        </option>
+
+                        <option
+                            value="price_high"
+                            {% if sort == 'price_high' %}selected{% endif %}
+                        >
+                            Price: High to Low
+                        </option>
+
+                        <option
+                            value="newest"
+                            {% if sort == 'newest' %}selected{% endif %}
+                        >
+                            Newest
+                        </option>
+
+                    </select>
+
+                </form>
+
+            </div>
+
+            <!-- =========================
+                 PRODUCT LIST
+            ========================= -->
+
+            {% if products %}
+
+                <div class="product-grid">
+
+                    {% for product in products %}
+
+                        <div class="product-card">
+
+                            <!-- PRODUCT IMAGE -->
+
+                            <div class="product-image">
+
+                                {% if product.image %}
+
+                                    <img
+                                        src="{{ product.image.url }}"
+                                        alt="{{ product.name }}"
+                                    >
+
+                                {% else %}
+
+                                    <span class="no-image">
+                                        No Image
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                            <!-- PRODUCT CONTENT -->
+
+                            <div class="product-content">
+
+                                <!-- PRODUCT NAME -->
+
+                                <div class="product-name">
+
+                                    <a
+                                        href="{% url 'product_detail' product.id %}"
+                                    >
+                                        {{ product.name }}
+                                    </a>
+
+                                </div>
+
+                                <!-- BRAND -->
+
+                                <div class="brand">
+                                    Brand:
+                                    {{ product.brand }}
+                                </div>
+
+                                <!-- COMPATIBILITY -->
+
+                                <div class="compatibility">
+
+                                    {% if product.compatibility %}
+
+                                        Fits:
+                                        {{ product.compatibility }}
+
+                                    {% else %}
+
+                                        Compatibility not specified
+
+                                    {% endif %}
+
+                                </div>
+
+                                <!-- PRICE -->
+
+                                <div class="price">
+                                    ₹{{ product.price }}
+                                </div>
+
+                                <!-- STOCK -->
+
+                                {% if product.stock > 0 %}
+
+                                    <div class="stock">
+                                        ✓ In Stock
+                                    </div>
+
+                                {% else %}
+
+                                    <div class="stock out-of-stock">
+                                        Out of Stock
+                                    </div>
+
+                                {% endif %}
+
+                                <!-- ACTION BUTTONS -->
+
+                                <div class="product-actions">
+
+                                    <a
+                                        href="{% url 'product_detail' product.id %}"
+                                        class="view-btn"
+                                    >
+                                        View
+                                    </a>
+
+                                    {% if product.stock > 0 %}
+
+                                        <a
+                                            href="{% url 'add_to_cart' product.id %}"
+                                            class="cart-btn"
+                                        >
+                                            Add to Cart
+                                        </a>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <!-- NO PRODUCTS -->
+
+                <div class="no-products">
+
+                    <h2>
+                        No products found
+                    </h2>
+
+                    <p>
+                        Try searching for another auto part.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

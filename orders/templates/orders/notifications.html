@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications | SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #111827;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #f59e0b;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 45px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #6b7280;
+        }
+
+        /* =========================
+           NOTIFICATION CARD
+        ========================= */
+
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .notification-card.unread {
+            border-left: 5px solid #f59e0b;
+            background: #fffbeb;
+        }
+
+        .notification-content {
+            display: flex;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .notification-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #fff7ed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .notification-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .notification-message {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .notification-time {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        .notification-action {
+            white-space: nowrap;
+        }
+
+        .read-btn {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 7px;
+            background: #111827;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .read-btn:hover {
+            background: #374151;
+        }
+
+        .read-label {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty-state {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 60px 25px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #6b7280;
+            margin-bottom: 22px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #f59e0b;
+            color: #111827;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+            }
+
+            .notification-card {
+                flex-direction: column;
+            }
+
+            .notification-action {
+                width: 100%;
+            }
+
+            .read-btn {
+                display: block;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="brand">
+            SK Automobile Parts
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'shop' %}">
+                Shop
+            </a>
+
+            <a href="{% url 'my_orders' %}">
+                My Orders
+            </a>
+
+            <a href="{% url 'notifications' %}">
+                🔔 Notifications
+            </a>
+
+            <a href="{% url 'cart_view' %}">
+                🛒 Cart
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h1>
+                🔔 Notifications
+            </h1>
+
+            <p>
+                Stay updated about your orders and deliveries.
+            </p>
+
+        </div>
+
+
+        {% if notifications %}
+
+            <div class="notification-list">
+
+                {% for notification in notifications %}
+
+                    <div class="notification-card
+                        {% if not notification.is_read %}
+                            unread
+                        {% endif %}
+                    ">
+
+                        <div class="notification-content">
+
+                            <div class="notification-icon">
+
+                                {% if notification.notification_type == 'confirmed' %}
+                                    ✓
+                                {% elif notification.notification_type == 'preparing' %}
+                                    🔧
+                                {% elif notification.notification_type == 'out_for_delivery' %}
+                                    🚚
+                                {% elif notification.notification_type == 'delivered' %}
+                                    📦
+                                {% elif notification.notification_type == 'cancelled' %}
+                                    ✕
+                                {% else %}
+                                    🔔
+                                {% endif %}
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="notification-title">
+                                    {{ notification.title }}
+                                </div>
+
+                                <div class="notification-message">
+                                    {{ notification.message }}
+                                </div>
+
+                                <div class="notification-time">
+                                    {{ notification.created_at|date:"d M Y, h:i A" }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="notification-action">
+
+                            {% if not notification.is_read %}
+
+                                <a
+                                    href="{% url 'mark_notification_read' notification.id %}"
+                                    class="read-btn"
+                                >
+                                    Mark as Read
+                                </a>
+
+                            {% else %}
+
+                                <span class="read-label">
+                                    ✓ Read
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🔔
+                </div>
+
+                <h2>
+                    No notifications yet
+                </h2>
+
+                <p>
+                    Order updates and delivery notifications
+                    will appear here.
+                </p>
+
+                <a
+                    href="{% url 'shop' %}"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

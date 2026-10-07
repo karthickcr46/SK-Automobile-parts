@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Shop - SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #172337;
+            color: white;
+            padding-top: 25px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 25px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2874f0;
+            color: white;
+        }
+
+        .sidebar a.active {
+            background: #2874f0;
+            color: white;
+        }
+
+        /* Main */
+        .main {
+            margin-left: 240px;
+            padding: 25px;
+        }
+
+        /* Top bar */
+        .topbar {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background: #545b62;
+        }
+
+        /* Form */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 900px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-container h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #2874f0;
+        }
+
+        .location-info {
+            background: #f0f6ff;
+            padding: 15px;
+            border-left: 4px solid #2874f0;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 30px;
+            margin: 10px 0 25px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input {
+            width: auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .save-btn {
+            background: #2874f0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .save-btn:hover {
+            background: #1258c7;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .cancel-btn:hover {
+            background: #545b62;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>SK Automobile Parts</h2>
+
+        <a href="{% url 'dashboard_home' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'admin_products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'admin_categories' %}">
+            Categories
+        </a>
+
+        <a href="{% url 'admin_shops' %}" class="active">
+            Shops
+        </a>
+
+        <a href="#">
+            Orders
+        </a>
+
+        <a href="#">
+            Customers
+        </a>
+
+        <a href="#">
+            Payments
+        </a>
+
+        <a href="{% url 'admin_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+
+            <h1>Add Shop</h1>
+
+            <a
+                href="{% url 'admin_shops' %}"
+                class="back-btn"
+            >
+                ← Back to Shops
+            </a>
+
+        </div>
+
+
+        <!-- Form -->
+        <div class="form-container">
+
+            <h2>Shop Information</h2>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- Shop Name -->
+                <div class="form-group">
+
+                    <label for="name">
+                        Shop Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Example: SK Auto Care"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Owner -->
+                <div class="form-group">
+
+                    <label for="owner">
+                        Shop Owner
+                    </label>
+
+                    <select
+                        id="owner"
+                        name="owner"
+                        required
+                    >
+
+                        <option value="">
+                            Select Shop Owner
+                        </option>
+
+                        {% for user in users %}
+
+                            <option value="{{ user.id }}">
+                                {{ user.username }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                    <div class="help-text">
+                        Select the staff user who will manage this shop.
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter shop phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Address -->
+                <div class="form-group">
+
+                    <label for="address">
+                        Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter complete shop address"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- City -->
+                <div class="form-group">
+
+                    <label for="city">
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        placeholder="Example: Chennai"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Location -->
+                <div class="location-info">
+
+                    <strong>Shop Location</strong>
+
+                    <p>
+                        Enter the shop's latitude and longitude.
+                        These coordinates will later be used to
+                        find nearby shops on the map.
+                    </p>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <!-- Latitude -->
+                    <div class="form-group">
+
+                        <label for="latitude">
+                            Latitude
+                        </label>
+
+                        <input
+                            type="number"
+                            id="latitude"
+                            name="latitude"
+                            step="0.000001"
+                            placeholder="Example: 13.082680"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Longitude -->
+                    <div class="form-group">
+
+                        <label for="longitude">
+                            Longitude
+                        </label>
+
+                        <input
+                            type="number"
+                            id="longitude"
+                            name="longitude"
+                            step="0.000001"
+                            placeholder="Example: 80.270718"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Status -->
+                <div class="checkbox-group">
+
+                    <div class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="is_open"
+                            name="is_open"
+                            checked
+                        >
+
+                        <label for="is_open">
+                            Shop is Open
+                        </label>
+
+                    </div>
+
+
+                    <div class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="accepts_orders"
+                            name="accepts_orders"
+                            checked
+                        >
+
+                        <label for="accepts_orders">
+                            Accept Orders
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save Shop
+                    </button>
+
+                    <a
+                        href="{% url 'admin_shops' %}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
