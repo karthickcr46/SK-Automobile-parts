@@ -4,7 +4,7 @@ Django settings for sk_automobile_parts project.
 Production-ready configuration for:
 - Local development with SQLite
 - Production deployment with PostgreSQL
-- Environment variables
+- Cloudinary media storage in production
 - WhiteNoise static files
 - Gmail SMTP
 """
@@ -42,7 +42,6 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
-# Allow Render's hostname automatically when deployed.
 RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 
 if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
@@ -62,6 +61,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Cloudinary
+    "cloudinary_storage",
+    "cloudinary",
 
     # Project applications
     "accounts",
@@ -152,6 +155,7 @@ WSGI_APPLICATION = "sk_automobile_parts.wsgi.application"
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
+
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
@@ -159,7 +163,9 @@ if DATABASE_URL:
             ssl_require=True,
         )
     }
+
 else:
+
     # Local development database
     DATABASES = {
         "default": {
@@ -222,16 +228,6 @@ STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# WhiteNoise compressed static files
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
 
 # =========================================================
 # MEDIA FILES
@@ -240,6 +236,43 @@ STORAGES = {
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+# =========================================================
+# STORAGE
+# =========================================================
+#
+# Local:
+#   Product images stay in media/
+#
+# Production:
+#   Product images are stored in Cloudinary.
+#
+# Cloudinary is activated automatically when
+# CLOUDINARY_URL exists in the environment.
+# =========================================================
+
+if os.getenv("CLOUDINARY_URL"):
+
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+else:
+
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 
 
 # =========================================================
