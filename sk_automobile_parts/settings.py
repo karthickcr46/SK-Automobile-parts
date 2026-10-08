@@ -41,6 +41,9 @@ ALLOWED_HOSTS = [
     for host in os.getenv("ALLOWED_HOSTS", "").split(",")
     if host.strip()
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://sk-automobile-parts.onrender.com",
+]
 
 RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 
