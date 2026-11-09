@@ -1,0 +1,785 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "Brake System",
+    "description": "Brake pads, brake discs and other braking components.",
+    "created_at": "2026-09-30T10:46:58.548Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Chain & Sprocket",
+    "description": "",
+    "created_at": "2026-10-01T10:26:11.925Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Electrical Parts",
+    "description": "",
+    "created_at": "2026-10-01T10:26:11.966Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "name": "Clutch Parts",
+    "description": "",
+    "created_at": "2026-10-01T10:26:11.983Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 5,
+  "fields": {
+    "name": "Service Parts",
+    "description": "",
+    "created_at": "2026-10-01T10:26:12.004Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 6,
+  "fields": {
+    "name": "Body Parts",
+    "description": "",
+    "created_at": "2026-10-01T10:26:12.020Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 7,
+  "fields": {
+    "name": "Lighting",
+    "description": "",
+    "created_at": "2026-10-01T10:26:12.037Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 8,
+  "fields": {
+    "name": "Accessories",
+    "description": "",
+    "created_at": "2026-10-01T10:26:12.053Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 9,
+  "fields": {
+    "name": "Engine Parts",
+    "description": "Motorcycle Engine Parts spare parts.",
+    "created_at": "2026-10-06T10:58:22.097Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "name": "Front Brake Pad",
+    "brand": "Bosch",
+    "part_number": "BP-R15-001",
+    "description": "brake fill",
+    "price": "850.00",
+    "stock": 5,
+    "image": "products/front_disc_brake_pad_set_jiwbks",
+    "compatibility": "Yamaha R15 V3, Yamaha R15 V4",
+    "is_active": true,
+    "created_at": "2026-10-01T07:07:44.862Z",
+    "updated_at": "2026-10-06T07:00:34.329Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "category": 1,
+    "name": "Rear Disc Brake Pad",
+    "brand": "TVS",
+    "part_number": "BP-TV-R15-002",
+    "description": "High-quality rear disc brake pad designed for reliable braking performance.",
+    "price": "650.00",
+    "stock": 16,
+    "image": "",
+    "compatibility": "Yamaha R15 V3, R15 V4",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.297Z",
+    "updated_at": "2026-10-05T06:35:40.780Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "category": 2,
+    "name": "Chain Sprocket Kit",
+    "brand": "Rolon",
+    "part_number": "CS-RLN-150-001",
+    "description": "Durable chain and sprocket kit for smooth power transmission.",
+    "price": "1850.00",
+    "stock": 11,
+    "image": "",
+    "compatibility": "Yamaha FZ, FZS",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.309Z",
+    "updated_at": "2026-10-01T18:06:53.241Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "category": 3,
+    "name": "Motorcycle Battery",
+    "brand": "Exide",
+    "part_number": "BAT-EXD-001",
+    "description": "Reliable maintenance-free battery for everyday motorcycle use.",
+    "price": "2100.00",
+    "stock": 8,
+    "image": "",
+    "compatibility": "Honda Shine, Honda Unicorn",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.321Z",
+    "updated_at": "2026-10-01T10:55:47.321Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "category": 4,
+    "name": "Clutch Plate Set",
+    "brand": "FCC",
+    "part_number": "CL-FCC-125-001",
+    "description": "High-performance clutch plate set for smooth gear shifting.",
+    "price": "1250.00",
+    "stock": 15,
+    "image": "",
+    "compatibility": "Honda Shine 125",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.330Z",
+    "updated_at": "2026-10-01T10:55:47.330Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "category": 5,
+    "name": "Engine Oil Filter",
+    "brand": "Bosch",
+    "part_number": "OF-BOS-001",
+    "description": "Premium oil filter designed to protect the engine from contaminants.",
+    "price": "320.00",
+    "stock": 25,
+    "image": "",
+    "compatibility": "Honda, Yamaha, TVS",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.346Z",
+    "updated_at": "2026-10-01T10:55:47.346Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "category": 6,
+    "name": "Universal Motorcycle Side Mirror",
+    "brand": "Royal Enfield",
+    "part_number": "SM-RE-001",
+    "description": "Strong and stylish side mirror suitable for motorcycles.",
+    "price": "750.00",
+    "stock": 8,
+    "image": "",
+    "compatibility": "Royal Enfield Classic, Meteor",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.362Z",
+    "updated_at": "2026-10-07T06:02:31.592Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "category": 7,
+    "name": "LED Headlight Bulb",
+    "brand": "Philips",
+    "part_number": "LED-PHL-001",
+    "description": "Bright LED headlight bulb providing improved visibility during night riding.",
+    "price": "950.00",
+    "stock": 20,
+    "image": "",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.365Z",
+    "updated_at": "2026-10-01T10:55:47.365Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 10,
+  "fields": {
+    "category": 8,
+    "name": "Motorcycle Mobile Holder",
+    "brand": "Generic",
+    "part_number": "MH-GEN-001",
+    "description": "Secure handlebar-mounted mobile holder for motorcycle riders.",
+    "price": "499.00",
+    "stock": 26,
+    "image": "",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-01T10:55:47.381Z",
+    "updated_at": "2026-10-05T07:37:07.689Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 11,
+  "fields": {
+    "category": 1,
+    "name": "Front Disc Brake Pad Set",
+    "brand": "TVS",
+    "part_number": "TVS-BRK-001",
+    "description": "High-quality front disc brake pad set for reliable braking performance.",
+    "price": "450.00",
+    "stock": 25,
+    "image": "media/products/front_disc_brake_pad_set_jiwbks",
+    "compatibility": "TVS Apache, Raider",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:21.999Z",
+    "updated_at": "2026-10-06T10:59:10.399Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 12,
+  "fields": {
+    "category": 1,
+    "name": "Rear Disc Brake Pad",
+    "brand": "Bajaj",
+    "part_number": "BAJ-BRK-002",
+    "description": "Durable rear disc brake pads designed for consistent stopping performance.",
+    "price": "520.00",
+    "stock": 18,
+    "image": "media/products/rear_disc_brake_pad_dr0cv4",
+    "compatibility": "Bajaj Pulsar, NS200",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.010Z",
+    "updated_at": "2026-10-06T10:59:10.406Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 13,
+  "fields": {
+    "category": 1,
+    "name": "Front Disc Brake Plate",
+    "brand": "Hero",
+    "part_number": "HER-BRK-003",
+    "description": "Precision-machined front brake disc with excellent heat resistance.",
+    "price": "1250.00",
+    "stock": 12,
+    "image": "media/products/front_disc_brake_plate_qpx1vy",
+    "compatibility": "Hero Splendor, Xtreme",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.018Z",
+    "updated_at": "2026-10-06T10:59:10.412Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 14,
+  "fields": {
+    "category": 1,
+    "name": "Rear Brake Shoe Set",
+    "brand": "Honda",
+    "part_number": "HON-BRK-004",
+    "description": "Reliable rear drum brake shoe set for smooth braking.",
+    "price": "380.00",
+    "stock": 30,
+    "image": "media/products/rear_brake_shoe_set_f5ri0k",
+    "compatibility": "Honda Shine, Unicorn",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.024Z",
+    "updated_at": "2026-10-06T10:59:10.412Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 15,
+  "fields": {
+    "category": 2,
+    "name": "Chain Sprocket Kit",
+    "brand": "Hero",
+    "part_number": "HER-CHN-001",
+    "description": "Complete chain and sprocket kit for smooth power transmission.",
+    "price": "950.00",
+    "stock": 20,
+    "image": "media/products/chain_sprocket_kit_cwzyuv",
+    "compatibility": "Hero Splendor, HF Deluxe",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.030Z",
+    "updated_at": "2026-10-06T10:59:10.424Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 16,
+  "fields": {
+    "category": 2,
+    "name": "Heavy Duty Drive Chain",
+    "brand": "Rolon",
+    "part_number": "ROL-CHN-002",
+    "description": "Heavy-duty motorcycle drive chain with long service life.",
+    "price": "650.00",
+    "stock": 22,
+    "image": "media/products/heavy_duty_drive_chain_sq9lq8",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.034Z",
+    "updated_at": "2026-10-06T10:59:10.428Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 17,
+  "fields": {
+    "category": 2,
+    "name": "Rear Sprocket",
+    "brand": "Rolon",
+    "part_number": "ROL-SPR-003",
+    "description": "Precision-cut rear sprocket for efficient drivetrain performance.",
+    "price": "550.00",
+    "stock": 16,
+    "image": "media/products/rear_sprocket_fnztg2",
+    "compatibility": "Bajaj Pulsar",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.044Z",
+    "updated_at": "2026-10-06T10:59:10.433Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 18,
+  "fields": {
+    "category": 3,
+    "name": "12V Motorcycle Battery",
+    "brand": "Exide",
+    "part_number": "EXI-BAT-001",
+    "description": "Maintenance-free 12V battery designed for reliable starting power.",
+    "price": "1850.00",
+    "stock": 14,
+    "image": "media/products/motorcycle_battery_rlwoc6",
+    "compatibility": "Honda, Yamaha, TVS",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.050Z",
+    "updated_at": "2026-10-06T10:59:10.440Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 19,
+  "fields": {
+    "category": 3,
+    "name": "Motorcycle Horn 12V",
+    "brand": "Bosch",
+    "part_number": "BOS-HRN-002",
+    "description": "High-quality 12V motorcycle horn with clear sound output.",
+    "price": "220.00",
+    "stock": 35,
+    "image": "media/products/motorcycle_horn_12v_hie0ms",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.058Z",
+    "updated_at": "2026-10-06T10:59:10.442Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 20,
+  "fields": {
+    "category": 3,
+    "name": "Ignition Coil",
+    "brand": "Bosch",
+    "part_number": "BOS-IGN-003",
+    "description": "Reliable ignition coil for consistent engine starting.",
+    "price": "680.00",
+    "stock": 15,
+    "image": "media/products/ignition_coil_gpwnkk",
+    "compatibility": "Honda, Hero",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.064Z",
+    "updated_at": "2026-10-06T10:59:10.452Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 21,
+  "fields": {
+    "category": 3,
+    "name": "Regulator Rectifier",
+    "brand": "TVS",
+    "part_number": "TVS-REG-004",
+    "description": "Voltage regulator rectifier for stable motorcycle electrical systems.",
+    "price": "780.00",
+    "stock": 11,
+    "image": "media/products/regulator_rectifier_jqxzc5",
+    "compatibility": "TVS Apache",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.070Z",
+    "updated_at": "2026-10-06T10:59:10.455Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 22,
+  "fields": {
+    "category": 4,
+    "name": "Clutch Plate Set",
+    "brand": "Yamaha",
+    "part_number": "YAM-CLT-001",
+    "description": "Complete clutch plate set for smooth gear shifting.",
+    "price": "750.00",
+    "stock": 19,
+    "image": "media/products/clutch_plate_set_tbug2c",
+    "compatibility": "Yamaha FZ, MT-15",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.077Z",
+    "updated_at": "2026-10-06T10:59:10.462Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 23,
+  "fields": {
+    "category": 4,
+    "name": "Clutch Cable",
+    "brand": "Honda",
+    "part_number": "HON-CLT-002",
+    "description": "Flexible and durable clutch cable for smooth clutch operation.",
+    "price": "180.00",
+    "stock": 40,
+    "image": "media/products/clutch_cable_e6awe5",
+    "compatibility": "Honda Shine",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.084Z",
+    "updated_at": "2026-10-06T10:59:10.462Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 24,
+  "fields": {
+    "category": 4,
+    "name": "Clutch Spring Set",
+    "brand": "Bajaj",
+    "part_number": "BAJ-CLT-003",
+    "description": "Heavy-duty clutch springs for consistent clutch engagement.",
+    "price": "260.00",
+    "stock": 25,
+    "image": "media/products/clutch_spring_set_mutnqq",
+    "compatibility": "Bajaj Pulsar",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.092Z",
+    "updated_at": "2026-10-06T10:59:10.472Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 25,
+  "fields": {
+    "category": 9,
+    "name": "Air Filter",
+    "brand": "Honda",
+    "part_number": "HON-AIR-001",
+    "description": "High-efficiency engine air filter for improved airflow.",
+    "price": "280.00",
+    "stock": 32,
+    "image": "media/products/air_filter_hy1bpt",
+    "compatibility": "Honda Shine, Unicorn",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.103Z",
+    "updated_at": "2026-10-06T10:59:10.472Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 26,
+  "fields": {
+    "category": 9,
+    "name": "Engine Oil Filter",
+    "brand": "Bosch",
+    "part_number": "BOS-OIL-002",
+    "description": "Engine oil filter designed to remove contaminants effectively.",
+    "price": "320.00",
+    "stock": 28,
+    "image": "media/products/engine_oil_filter_tcsdnx",
+    "compatibility": "Honda, Yamaha, TVS",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.109Z",
+    "updated_at": "2026-10-06T10:59:10.482Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 27,
+  "fields": {
+    "category": 9,
+    "name": "Spark Plug",
+    "brand": "NGK",
+    "part_number": "NGK-SPK-003",
+    "description": "Reliable spark plug for efficient ignition and engine performance.",
+    "price": "160.00",
+    "stock": 50,
+    "image": "media/products/spark_plug_bffdhd",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.115Z",
+    "updated_at": "2026-10-06T10:59:10.488Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 28,
+  "fields": {
+    "category": 9,
+    "name": "Engine Oil 10W-30",
+    "brand": "Motul",
+    "part_number": "MOT-OIL-004",
+    "description": "Premium motorcycle engine oil providing excellent engine protection.",
+    "price": "520.00",
+    "stock": 24,
+    "image": "media/products/engine_oil_10w30_hgnp75",
+    "compatibility": "Honda, Yamaha, TVS",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.121Z",
+    "updated_at": "2026-10-06T10:59:10.491Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 29,
+  "fields": {
+    "category": 7,
+    "name": "LED Headlight Bulb H4",
+    "brand": "HJG",
+    "part_number": "HJG-LED-001",
+    "description": "Bright LED H4 headlight bulb with improved night visibility.",
+    "price": "950.00",
+    "stock": 17,
+    "image": "media/products/led_headlight_bulb_h4_ngkp6q",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.128Z",
+    "updated_at": "2026-10-06T10:59:10.501Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 30,
+  "fields": {
+    "category": 7,
+    "name": "LED Indicator Set",
+    "brand": "Universal",
+    "part_number": "UNI-LED-002",
+    "description": "Modern LED indicator set for improved visibility and styling.",
+    "price": "450.00",
+    "stock": 23,
+    "image": "media/products/led_indicator_set_mrt6zk",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.135Z",
+    "updated_at": "2026-10-06T10:59:10.504Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 31,
+  "fields": {
+    "category": 7,
+    "name": "LED Tail Light",
+    "brand": "TVS",
+    "part_number": "TVS-TAL-003",
+    "description": "Bright LED tail light for improved rear visibility.",
+    "price": "380.00",
+    "stock": 19,
+    "image": "media/products/led_tail_light_bvhnna",
+    "compatibility": "TVS Apache",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.142Z",
+    "updated_at": "2026-10-07T13:39:29.106Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 32,
+  "fields": {
+    "category": 6,
+    "name": "Rear Shock Absorber",
+    "brand": "TVS",
+    "part_number": "TVS-SHO-001",
+    "description": "Durable rear shock absorber providing comfortable suspension performance.",
+    "price": "2450.00",
+    "stock": 8,
+    "image": "media/products/rear_shock_absorber_lgfpvg",
+    "compatibility": "TVS Apache",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.142Z",
+    "updated_at": "2026-10-06T10:59:10.512Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 33,
+  "fields": {
+    "category": 6,
+    "name": "Side Mirror Pair",
+    "brand": "Universal",
+    "part_number": "UNI-MIR-002",
+    "description": "Universal motorcycle side mirror pair with clear rear visibility.",
+    "price": "350.00",
+    "stock": 35,
+    "image": "media/products/side_mirror_pair_d9icxf",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.155Z",
+    "updated_at": "2026-10-06T10:59:10.522Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 34,
+  "fields": {
+    "category": 6,
+    "name": "Passenger Footrest",
+    "brand": "Bajaj",
+    "part_number": "BAJ-FTR-003",
+    "description": "Strong replacement passenger footrest for comfortable riding.",
+    "price": "420.00",
+    "stock": 17,
+    "image": "media/products/passenger_footrest_m8whb2",
+    "compatibility": "Bajaj Pulsar",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.161Z",
+    "updated_at": "2026-10-07T09:40:40.591Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 35,
+  "fields": {
+    "category": 8,
+    "name": "Motorcycle Mobile Holder",
+    "brand": "Generic",
+    "part_number": "GEN-MOB-001",
+    "description": "Secure handlebar-mounted mobile holder for motorcycles.",
+    "price": "499.00",
+    "stock": 45,
+    "image": "media/products/motorcycle_mobile_holder_pwhdby",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.161Z",
+    "updated_at": "2026-10-06T10:59:10.532Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 36,
+  "fields": {
+    "category": 8,
+    "name": "USB Motorcycle Charger",
+    "brand": "Generic",
+    "part_number": "GEN-USB-002",
+    "description": "12V USB charger for convenient mobile charging while riding.",
+    "price": "399.00",
+    "stock": 30,
+    "image": "media/products/usb_motorcycle_charger_ih0vsu",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.174Z",
+    "updated_at": "2026-10-06T10:59:10.538Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 37,
+  "fields": {
+    "category": 8,
+    "name": "Waterproof Bike Cover",
+    "brand": "Generic",
+    "part_number": "GEN-CVR-003",
+    "description": "Water-resistant motorcycle cover for outdoor protection.",
+    "price": "650.00",
+    "stock": 19,
+    "image": "media/products/waterproof_bike_cover_ubwbj4",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.182Z",
+    "updated_at": "2026-10-07T09:12:25.564Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 38,
+  "fields": {
+    "category": 5,
+    "name": "Chain Lubricant",
+    "brand": "Motul",
+    "part_number": "MOT-CHL-001",
+    "description": "Premium chain lubricant for smoother and quieter chain operation.",
+    "price": "480.00",
+    "stock": 26,
+    "image": "media/products/chain_lubricant_iejwry",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.189Z",
+    "updated_at": "2026-10-06T10:59:10.541Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 39,
+  "fields": {
+    "category": 5,
+    "name": "Brake Cleaner",
+    "brand": "Motul",
+    "part_number": "MOT-BCL-002",
+    "description": "Fast-drying brake cleaner for motorcycle brake components.",
+    "price": "350.00",
+    "stock": 19,
+    "image": "media/products/brake_cleaner_oewfyq",
+    "compatibility": "Universal Motorcycle",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.197Z",
+    "updated_at": "2026-10-07T06:55:46.117Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 40,
+  "fields": {
+    "category": 5,
+    "name": "Engine Oil 20W-40",
+    "brand": "Castrol",
+    "part_number": "CAS-OIL-003",
+    "description": "Motorcycle engine oil for everyday riding and engine protection.",
+    "price": "420.00",
+    "stock": 27,
+    "image": "media/products/engine_oil_20w40_ojftel",
+    "compatibility": "Hero, Bajaj, Honda",
+    "is_active": true,
+    "created_at": "2026-10-06T10:58:22.204Z",
+    "updated_at": "2026-10-07T07:37:18.386Z"
+  }
+}
+]

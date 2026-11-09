@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Shop - SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #162238;
+            color: white;
+            padding-top: 25px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 16px;
+        }
+
+        .sidebar a:hover {
+            background: #2875e8;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        .card {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background: #2875e8;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #165fc7;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>SK Automobile Parts</h2>
+
+    <a href="{% url 'dashboard_home' %}">Dashboard</a>
+    <a href="{% url 'admin_products' %}">Products</a>
+    <a href="{% url 'admin_categories' %}">Categories</a>
+    <a href="{% url 'admin_shops' %}">Shops</a>
+    <a href="{% url 'admin_inventory' %}">Inventory</a>
+    <a href="#">Orders</a>
+    <a href="#">Customers</a>
+    <a href="#">Payments</a>
+    <a href="{% url 'admin_logout' %}">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="card">
+
+        <h1>Edit Shop</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Shop Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ shop.name }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Owner</label>
+
+                <select name="owner" required>
+
+                    {% for user in users %}
+
+                        <option
+                            value="{{ user.id }}"
+                            {% if user.id == shop.owner_id %}selected{% endif %}
+                        >
+                            {{ user.username }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    value="{{ shop.phone }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Address</label>
+
+                <textarea
+                    name="address"
+                    required
+                >{{ shop.address }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+
+                <input
+                    type="text"
+                    name="city"
+                    value="{{ shop.city }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Latitude</label>
+
+                <input
+                    type="text"
+                    name="latitude"
+                    value="{{ shop.latitude }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Longitude</label>
+
+                <input
+                    type="text"
+                    name="longitude"
+                    value="{{ shop.longitude }}"
+                    required
+                >
+            </div>
+
+            <div class="checkbox-group">
+
+                <input
+                    type="checkbox"
+                    name="is_open"
+                    id="is_open"
+                    {% if shop.is_open %}checked{% endif %}
+                >
+
+                <label for="is_open">
+                    Shop is currently open
+                </label>
+
+            </div>
+
+            <div class="checkbox-group">
+
+                <input
+                    type="checkbox"
+                    name="accepts_orders"
+                    id="accepts_orders"
+                    {% if shop.accepts_orders %}checked{% endif %}
+                >
+
+                <label for="accepts_orders">
+                    Shop accepts customer orders
+                </label>
+
+            </div>
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    Update Shop
+                </button>
+
+                <a
+                    href="{% url 'admin_shops' %}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

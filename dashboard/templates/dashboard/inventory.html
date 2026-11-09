@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inventory - SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #172337;
+            color: white;
+            padding-top: 25px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 25px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2874f0;
+            color: white;
+        }
+
+        .sidebar a.active {
+            background: #2874f0;
+            color: white;
+        }
+
+        .main {
+            margin-left: 240px;
+            padding: 25px;
+        }
+
+        .topbar {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .add-btn {
+            background: #2874f0;
+            color: white;
+            padding: 11px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .add-btn:hover {
+            background: #1258c7;
+        }
+
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .available {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .unavailable {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .stock {
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>SK Automobile Parts</h2>
+
+        <a href="{% url 'dashboard_home' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'admin_products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'admin_categories' %}">
+            Categories
+        </a>
+
+        <a href="{% url 'admin_shops' %}">
+            Shops
+        </a>
+
+        <a href="{% url 'admin_inventory' %}" class="active">
+            Inventory
+        </a>
+
+        <a href="#">
+            Orders
+        </a>
+
+        <a href="#">
+            Customers
+        </a>
+
+        <a href="#">
+            Payments
+        </a>
+
+        <a href="{% url 'admin_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- Main -->
+    <div class="main">
+
+        <div class="topbar">
+
+            <h1>Shop Inventory</h1>
+
+            <a
+                href="{% url 'inventory_add' %}"
+                class="add-btn"
+            >
+                + Add Inventory
+            </a>
+
+        </div>
+
+
+        <div class="table-container">
+
+            {% if inventory %}
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Shop</th>
+                            <th>Product</th>
+                            <th>Part Number</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for item in inventory %}
+
+                            <tr>
+
+                                <td>
+                                    {{ item.id }}
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        {{ item.shop.name }}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    {{ item.product.name }}
+                                </td>
+
+                                <td>
+                                    {{ item.product.part_number }}
+                                </td>
+
+                                <td>
+                                    ₹{{ item.price }}
+                                </td>
+
+                                <td class="stock">
+                                    {{ item.stock }}
+                                </td>
+
+                                <td>
+
+                                    {% if item.is_available and item.stock > 0 %}
+
+                                        <span class="status available">
+                                            Available
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status unavailable">
+                                            Unavailable
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <div class="empty">
+
+                    <h3>No Inventory Added Yet</h3>
+
+                    <p>
+                        Add products to your shops to make
+                        them available for customer orders.
+                    </p>
+
+                    <a
+                        href="{% url 'inventory_add' %}"
+                        class="add-btn"
+                    >
+                        + Add First Inventory
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>

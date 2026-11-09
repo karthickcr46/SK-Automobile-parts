@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Products - SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* Sidebar */
+
+        .sidebar {
+            width: 240px;
+            background: #172337;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 14px 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .menu a:hover,
+        .menu .active {
+            background: #2874f0;
+        }
+
+
+        /* Main */
+
+        .main {
+            flex: 1;
+        }
+
+
+        /* Topbar */
+
+        .topbar {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .topbar h2 {
+            color: #172337;
+        }
+
+        .logout {
+            background: #e53935;
+            color: white;
+            padding: 9px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .logout:hover {
+            background: #c62828;
+        }
+
+
+        /* Content */
+
+        .content {
+            padding: 30px;
+        }
+
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            color: #172337;
+        }
+
+
+        /* Add Product */
+
+        .add-btn {
+            background: #2874f0;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 5px;
+        }
+
+        .add-btn:hover {
+            background: #1f5fc4;
+        }
+
+
+        /* Table */
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #172337;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f8f9fc;
+        }
+
+
+        /* Status */
+
+        .active {
+            color: green;
+            font-weight: bold;
+        }
+
+        .inactive {
+            color: red;
+            font-weight: bold;
+        }
+
+
+        /* Action Buttons */
+
+        .edit-btn {
+            background: #2874f0;
+            color: white;
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .edit-btn:hover {
+            background: #1f5fc4;
+        }
+
+
+        .delete-btn {
+            background: #e53935;
+            color: white;
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .delete-btn:hover {
+            background: #c62828;
+        }
+
+
+        /* Empty */
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+        }
+
+
+        /* Back */
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2874f0;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            SK Automobile Parts
+        </div>
+
+
+        <div class="menu">
+
+            <a href="{% url 'dashboard_home' %}">
+                Dashboard
+            </a>
+
+
+            <a
+                href="{% url 'admin_products' %}"
+                class="active"
+            >
+                Products
+            </a>
+
+
+            <a href="{% url 'admin_categories' %}">
+                Categories
+            </a>
+
+
+            <a href="#">
+                Orders
+            </a>
+
+
+            <a href="#">
+                Customers
+            </a>
+
+
+            <a href="#">
+                Payments
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- Main -->
+
+    <main class="main">
+
+
+        <!-- Topbar -->
+
+        <div class="topbar">
+
+            <h2>
+                Products Management
+            </h2>
+
+
+            <div>
+
+                Welcome,
+                {{ request.user.username }}
+
+                &nbsp;&nbsp;
+
+                <a
+                    href="{% url 'admin_logout' %}"
+                    class="logout"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Content -->
+
+        <section class="content">
+
+
+            <a
+                href="{% url 'dashboard_home' %}"
+                class="back-btn"
+            >
+                ← Back to Dashboard
+            </a>
+
+
+
+            <div class="page-header">
+
+
+                <h1>
+                    Products
+                </h1>
+
+
+                <a
+                    href="{% url 'product_add' %}"
+                    class="add-btn"
+                >
+                    + Add Product
+                </a>
+
+
+            </div>
+
+
+
+            <!-- Products Table -->
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Brand
+                            </th>
+
+                            <th>
+                                Part Number
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Stock
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        {% for product in products %}
+
+
+                        <tr>
+
+
+                            <td>
+                                {{ product.id }}
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    {{ product.name }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+                                {{ product.brand }}
+                            </td>
+
+
+                            <td>
+                                {{ product.part_number }}
+                            </td>
+
+
+                            <td>
+                                ₹{{ product.price }}
+                            </td>
+
+
+                            <td>
+                                {{ product.stock }}
+                            </td>
+
+
+                            <td>
+
+
+                                {% if product.is_active %}
+
+                                    <span class="active">
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="inactive">
+                                        Inactive
+                                    </span>
+
+                                {% endif %}
+
+
+                            </td>
+
+
+                            <!-- Actions -->
+
+                            <td>
+
+
+                                <a
+                                    href="{% url 'product_edit' product.id %}"
+                                    class="edit-btn"
+                                >
+                                    Edit
+                                </a>
+
+
+                                <a
+                                    href="{% url 'product_delete' product.id %}"
+                                    class="delete-btn"
+                                >
+                                    Delete
+                                </a>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                        {% empty %}
+
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="empty"
+                            >
+
+                                No products found.
+
+                            </td>
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+</html>

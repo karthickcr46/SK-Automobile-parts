@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SK Automobile Parts | Motorcycle Spare Parts</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            color: #212121;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           TOP NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #172337;
+            color: white;
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-box form {
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            border: none;
+            background: #2874f0;
+            color: white;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+
+        /* =========================
+           CATEGORY NAVIGATION
+        ========================= */
+
+        .category-nav {
+            background: white;
+            padding: 14px 5%;
+            display: flex;
+            gap: 30px;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .category-nav a {
+            color: #333;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .category-nav a:hover {
+            color: #2874f0;
+        }
+
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #172337,
+                    #2874f0
+                );
+
+            color: white;
+            padding: 70px 5%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            width: 1200px;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            max-width: 700px;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            max-width: 650px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #e8eefc;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .shop-now {
+            display: inline-block;
+            background: #ff9f00;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .shop-now:hover {
+            background: #fb8c00;
+        }
+
+        .browse-parts {
+            display: inline-block;
+            background: white;
+            color: #172337;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .browse-parts:hover {
+            background: #eeeeee;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 1200px;
+            max-width: 90%;
+            margin: 40px auto;
+        }
+
+
+        /* =========================
+           SECTION HEADER
+        ========================= */
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            color: #172337;
+        }
+
+        .section-header a {
+            color: #2874f0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           CATEGORY CARDS
+        ========================= */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+        }
+
+        .category-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .category-card h3 {
+            color: #172337;
+            margin-bottom: 7px;
+        }
+
+        .category-card p {
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           BIKE SECTION
+        ========================= */
+
+        .bike-section {
+            background: white;
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .bike-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .bike-card {
+            border: 1px solid #e5e5e5;
+            padding: 18px;
+            border-radius: 6px;
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .bike-card:hover {
+            border-color: #2874f0;
+            color: #2874f0;
+        }
+
+
+        /* =========================
+           WHY CHOOSE US
+        ========================= */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+            color: #172337;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            background: #172337;
+            color: white;
+            padding: 45px 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            margin-bottom: 12px;
+            font-size: 30px;
+        }
+
+        .cta p {
+            color: #d9e0ed;
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            background: #111827;
+            color: white;
+            margin-top: 50px;
+            padding: 40px 5%;
+        }
+
+        .footer-content {
+            width: 1200px;
+            max-width: 100%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .footer a {
+            display: block;
+            color: #aaa;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            padding-top: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+
+            .category-grid,
+            .bike-grid,
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .category-nav {
+                padding: 12px 20px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .shop-now,
+            .browse-parts {
+                text-align: center;
+            }
+
+            .container {
+                max-width: calc(100% - 30px);
+            }
+
+            .category-grid,
+            .bike-grid,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            SK Automobile Parts
+        </div>
+
+
+        <div class="search-box">
+
+            <form action="{% url 'shop' %}" method="get">
+
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Search auto parts, brands or part numbers..."
+                >
+
+                <button type="submit">
+                    🔍
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="nav-links">
+            
+            
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'shop' %}">
+                Shop
+            </a>
+
+            <a href="{% url 'cart_view' %}">
+                🛒 Cart
+            </a>
+
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'my_orders' %}">
+                    My Orders
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         CATEGORY NAVIGATION
+    ========================= -->
+
+    <div class="category-nav">
+
+        <a href="{% url 'shop' %}">
+            All Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Brake%20System">
+            Brake System
+        </a>
+
+        <a href="{% url 'shop' %}?category=Chain%20%26%20Sprocket">
+            Chain & Sprocket
+        </a>
+
+        <a href="{% url 'shop' %}?category=Electrical%20Parts">
+            Electrical Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Clutch%20Parts">
+            Clutch Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Service%20Parts">
+            Service Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Body%20Parts">
+            Body Parts
+        </a>
+
+        <a href="{% url 'shop' %}?category=Lighting">
+            Lighting
+        </a>
+
+        <a href="{% url 'shop' %}?category=Accessories">
+            Accessories
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Find the Right Parts for Your Bike
+            </h1>
+
+            <p>
+                Shop quality motorcycle spare parts, service parts
+                and accessories for your bike.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{% url 'shop' %}"
+                    class="shop-now"
+                >
+                    Shop Now
+                </a>
+
+                <a
+                    href="{% url 'shop' %}"
+                    class="browse-parts"
+                >
+                    Browse All Parts
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SHOP BY PARTS
+    ========================= -->
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2>
+                Shop by Parts
+            </h2>
+
+            <a href="{% url 'shop' %}">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div class="category-grid">
+
+
+            <!-- BRAKE SYSTEM -->
+
+            <a
+                href="{% url 'shop' %}?category=Brake%20System"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    🛑
+                </div>
+
+                <h3>
+                    Brake System
+                </h3>
+
+                <p>
+                    Brake pads, discs and components
+                </p>
+
+            </a>
+
+
+            <!-- CHAIN & SPROCKET -->
+
+            <a
+                href="{% url 'shop' %}?category=Chain%20%26%20Sprocket"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    ⛓️
+                </div>
+
+                <h3>
+                    Chain & Sprocket
+                </h3>
+
+                <p>
+                    Chains, sprockets and kits
+                </p>
+
+            </a>
+
+
+            <!-- ELECTRICAL PARTS -->
+
+            <a
+                href="{% url 'shop' %}?category=Electrical%20Parts"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Electrical Parts
+                </h3>
+
+                <p>
+                    Batteries, switches and electricals
+                </p>
+
+            </a>
+
+
+            <!-- CLUTCH PARTS -->
+
+            <a
+                href="{% url 'shop' %}?category=Clutch%20Parts"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    ⚙️
+                </div>
+
+                <h3>
+                    Clutch Parts
+                </h3>
+
+                <p>
+                    Clutch plates and components
+                </p>
+
+            </a>
+
+
+            <!-- SERVICE PARTS -->
+
+            <a
+                href="{% url 'shop' %}?category=Service%20Parts"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    🔧
+                </div>
+
+                <h3>
+                    Service Parts
+                </h3>
+
+                <p>
+                    Essential maintenance parts
+                </p>
+
+            </a>
+
+
+            <!-- LIGHTING -->
+
+            <a
+                href="{% url 'shop' %}?category=Lighting"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    💡
+                </div>
+
+                <h3>
+                    Lighting
+                </h3>
+
+                <p>
+                    Headlights, indicators and lights
+                </p>
+
+            </a>
+
+
+            <!-- BODY PARTS -->
+
+            <a
+                href="{% url 'shop' %}?category=Body%20Parts"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    🏍️
+                </div>
+
+                <h3>
+                    Body Parts
+                </h3>
+
+                <p>
+                    Panels, mirrors and body components
+                </p>
+
+            </a>
+
+
+            <!-- ACCESSORIES -->
+
+            <a
+                href="{% url 'shop' %}?category=Accessories"
+                class="category-card"
+            >
+
+                <div class="category-icon">
+                    🧰
+                </div>
+
+                <h3>
+                    Accessories
+                </h3>
+
+                <p>
+                    Useful motorcycle accessories
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SHOP BY BIKE
+    ========================= -->
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2>
+                Shop by Bike
+            </h2>
+
+        </div>
+
+
+        <div class="bike-section">
+
+            <div class="bike-grid">
+
+                <a
+                    href="{% url 'shop' %}?q=Yamaha"
+                    class="bike-card"
+                >
+                    Yamaha
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=Honda"
+                    class="bike-card"
+                >
+                    Honda
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=Royal%20Enfield"
+                    class="bike-card"
+                >
+                    Royal Enfield
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=TVS"
+                    class="bike-card"
+                >
+                    TVS
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=Bajaj"
+                    class="bike-card"
+                >
+                    Bajaj
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=Suzuki"
+                    class="bike-card"
+                >
+                    Suzuki
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=KTM"
+                    class="bike-card"
+                >
+                    KTM
+                </a>
+
+                <a
+                    href="{% url 'shop' %}?q=Hero"
+                    class="bike-card"
+                >
+                    Hero
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         WHY CHOOSE US
+    ========================= -->
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2>
+                Why Shop With Us?
+            </h2>
+
+        </div>
+
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    Quality Parts
+                </h3>
+
+                <p>
+                    Find reliable spare parts from
+                    trusted brands.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Easy Search
+                </h3>
+
+                <p>
+                    Find parts using product names,
+                    brands or part numbers.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🚚
+                </div>
+
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
+                    Track your order from confirmation
+                    to delivery.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    Secure Shopping
+                </h3>
+
+                <p>
+                    A simple and secure checkout
+                    experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CTA
+    ========================= -->
+
+    <div class="container">
+
+        <div class="cta">
+
+            <h2>
+                Ready to Find Your Bike Parts?
+            </h2>
+
+            <p>
+                Explore our growing collection of motorcycle
+                spare parts and accessories.
+            </p>
+
+            <a
+                href="{% url 'shop' %}"
+                class="shop-now"
+            >
+                Start Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+
+            <!-- ABOUT -->
+
+            <div>
+
+                <h3>
+                    SK Automobile Parts
+                </h3>
+
+                <p>
+                    Your online destination for motorcycle
+                    spare parts, service parts and accessories.
+                </p>
+
+            </div>
+
+
+            <!-- SHOP -->
+
+            <div>
+
+                <h3>
+                    Shop
+                </h3>
+
+                <a href="{% url 'shop' %}">
+                    All Parts
+                </a>
+
+                <a href="{% url 'shop' %}?category=Brake%20System">
+                    Brake System
+                </a>
+
+                <a href="{% url 'shop' %}?category=Electrical%20Parts">
+                    Electrical Parts
+                </a>
+
+                <a href="{% url 'shop' %}?category=Accessories">
+                    Accessories
+                </a>
+
+            </div>
+
+
+            <!-- CUSTOMER -->
+
+            <div>
+
+                <h3>
+                    Customer
+                </h3>
+
+                <a href="{% url 'cart_view' %}">
+                    Cart
+                </a>
+
+                {% if user.is_authenticated %}
+
+                    <a href="{% url 'my_orders' %}">
+                        My Orders
+                    </a>
+
+                    <a href="{% url 'logout' %}">
+                        Logout
+                    </a>
+
+                {% else %}
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                    <a href="{% url 'register' %}">
+                        Register
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- SUPPORT -->
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="{% url 'shop' %}">
+                    Track Order
+                </a>
+
+                <a href="{% url 'shop' %}">
+                    Contact Us
+                </a>
+
+                <a href="{% url 'shop' %}">
+                    FAQ
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 SK Automobile Parts.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

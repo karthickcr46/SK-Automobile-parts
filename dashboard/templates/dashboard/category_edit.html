@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Category - SK Automobile Parts</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #172337;
+        }
+
+        .logout {
+            background: #e53935;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 600px;
+            max-width: calc(100% - 40px);
+            margin: 40px auto;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #172337;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .update-btn {
+            background: #2874f0;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #777;
+            color: white;
+        }
+
+        .update-btn:hover {
+            background: #1f5fc4;
+        }
+
+        .cancel-btn:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+
+<div class="header">
+
+    <h2>SK Automobile Parts</h2>
+
+    <div>
+
+        <span>
+            Welcome, {{ request.user.username }}
+        </span>
+
+        &nbsp;&nbsp;
+
+        <a href="{% url 'admin_logout' %}" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Edit Form -->
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Edit Category</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label for="name">
+                Category Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ category.name }}"
+                required
+            >
+
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                rows="5"
+            >{{ category.description }}</textarea>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn update-btn"
+                >
+                    Update Category
+                </button>
+
+                <a
+                    href="{% url 'admin_categories' %}"
+                    class="btn cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

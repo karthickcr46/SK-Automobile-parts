@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product - SK Automobile Parts</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #172337;
+        }
+
+        .logout {
+            background: #e53935;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 800px;
+            max-width: calc(100% - 40px);
+            margin: 35px auto;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .form-box h1 {
+            margin-top: 0;
+            color: #172337;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="file"] {
+            padding: 9px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        .buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .save-btn {
+            background: #2874f0;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #1f5fc4;
+        }
+
+        .cancel-btn {
+            background: #777;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #555;
+        }
+
+        @media (max-width: 650px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+
+<div class="header">
+
+    <h2>
+        SK Automobile Parts
+    </h2>
+
+    <div>
+
+        <span>
+            Welcome, {{ request.user.username }}
+        </span>
+
+        &nbsp;&nbsp;
+
+        <a
+            href="{% url 'admin_logout' %}"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Main Content -->
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>
+            Add New Product
+        </h1>
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- Category + Product Name -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        {% for category in categories %}
+
+                            <option value="{{ category.id }}">
+                                {{ category.name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter product name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Brand + Part Number -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="brand">
+                        Brand
+                    </label>
+
+                    <input
+                        type="text"
+                        id="brand"
+                        name="brand"
+                        placeholder="Example: Bosch"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="part_number">
+                        Part Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="part_number"
+                        name="part_number"
+                        placeholder="Enter unique part number"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Enter product description"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- Price + Stock -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        step="0.01"
+                        min="0"
+                        placeholder="Enter price"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="stock">
+                        Stock Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="stock"
+                        name="stock"
+                        min="0"
+                        placeholder="Enter stock quantity"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Compatibility -->
+
+            <div class="form-group">
+
+                <label for="compatibility">
+                    Vehicle Compatibility
+                </label>
+
+                <input
+                    type="text"
+                    id="compatibility"
+                    name="compatibility"
+                    placeholder="Example: Honda Activa 5G, 2018-2022"
+                >
+
+            </div>
+
+
+            <!-- Product Image -->
+
+            <div class="form-group">
+
+                <label for="image">
+                    Product Image
+                </label>
+
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <!-- Active Status -->
+
+            <div class="form-group">
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        id="is_active"
+                        name="is_active"
+                        checked
+                    >
+
+                    <label
+                        for="is_active"
+                        style="margin: 0;"
+                    >
+                        Product is Active
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn save-btn"
+                >
+                    Save Product
+                </button>
+
+
+                <a
+                    href="{% url 'admin_products' %}"
+                    class="btn cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

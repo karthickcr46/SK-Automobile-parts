@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SK Automobile Parts - Customers</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #1f2937;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 235px;
+            background: #17243a;
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .brand {
+            padding: 28px 15px;
+            font-size: 21px;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav {
+            padding: 15px 0;
+        }
+
+        .nav a {
+            display: block;
+            padding: 14px 18px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav a:hover {
+            background: #263957;
+        }
+
+        .nav a.active {
+            background: #2f7be5;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 235px;
+            width: calc(100% - 235px);
+        }
+
+        .topbar {
+            height: 75px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout {
+            background: #ef4444;
+            color: white;
+            text-decoration: none;
+            padding: 10px 17px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #dc2626;
+        }
+
+        /* CONTENT */
+
+        .content {
+            padding: 35px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 16px;
+            background: #374151;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background: #1f2937;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h2 {
+            margin: 0 0 8px;
+            font-size: 32px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        /* TABLE */
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        thead {
+            background: #17243a;
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .role {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .empty {
+            padding: 45px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+                width: calc(100% - 190px);
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            SK Automobile Parts
+        </div>
+
+        <nav class="nav">
+
+            <a href="{% url 'dashboard_home' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'admin_products' %}">
+                Products
+            </a>
+
+            <a href="{% url 'admin_categories' %}">
+                Categories
+            </a>
+
+            <a href="{% url 'admin_orders' %}">
+                Orders
+            </a>
+
+            <a href="{% url 'admin_customers' %}" class="active">
+                Customers
+            </a>
+
+            <a href="#">
+                Payments
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <h1>
+                Customers
+            </h1>
+
+            <div class="topbar-right">
+
+                <span>
+                    Welcome, {{ request.user.username }}
+                </span>
+
+                <a href="{% url 'admin_logout' %}" class="logout">
+                    Logout
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            <a href="{% url 'dashboard_home' %}" class="back-button">
+                ← Back to Dashboard
+            </a>
+
+
+            <div class="page-header">
+
+                <h2>
+                    Registered Customers
+                </h2>
+
+                <p>
+                    View customers registered on SK Automobile Parts.
+                </p>
+
+            </div>
+
+
+            <div class="table-container">
+
+                {% if customers %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date Joined</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for customer in customers %}
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    {{ customer.username }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ customer.email|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ customer.first_name|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ customer.last_name|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ customer.date_joined|date:"d M Y, h:i A" }}
+                            </td>
+
+                            <td>
+
+                                {% if customer.is_active %}
+                                    <span class="role">
+                                        Active
+                                    </span>
+                                {% else %}
+                                    <span class="role">
+                                        Inactive
+                                    </span>
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                {% else %}
+
+                <div class="empty">
+
+                    <h3>
+                        No Customers Found
+                    </h3>
+
+                    <p>
+                        There are currently no registered customers.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

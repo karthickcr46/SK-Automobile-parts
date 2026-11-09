@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - SK Automobile Parts</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f5f6fa;
+        }
+
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            width: 240px;
+            background: #172337;
+            color: white;
+            padding: 25px 15px;
+            min-height: 100vh;
+        }
+
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 14px 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+
+        .menu a:hover {
+            background: #2874f0;
+        }
+
+
+        .menu .active {
+            background: #2874f0;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            flex: 1;
+        }
+
+
+        .topbar {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+
+        .topbar h2 {
+            color: #172337;
+        }
+
+
+        .logout {
+            background: #e53935;
+            color: white;
+            padding: 9px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+        .logout:hover {
+            background: #c62828;
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            padding: 30px;
+        }
+
+
+        .content h1 {
+            color: #172337;
+        }
+
+
+        .subtitle {
+            margin-top: 8px;
+            color: #666;
+        }
+
+
+        /* =========================
+           DASHBOARD CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
+
+
+        .card-link .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+
+        .card h3 {
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+
+        .card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2874f0;
+        }
+
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-title {
+            margin-top: 35px;
+            color: #172337;
+        }
+
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+
+        .quick-action {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #172337;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
+
+
+        .quick-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+
+        .quick-action h3 {
+            margin-bottom: 8px;
+            color: #2874f0;
+        }
+
+
+        .quick-action p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .cards,
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+            SK Automobile Parts
+        </div>
+
+
+        <div class="menu">
+
+
+            <!-- Dashboard -->
+
+            <a href="{% url 'dashboard_home' %}" class="active">
+                Dashboard
+            </a>
+
+
+            <!-- Products -->
+
+            <a href="{% url 'admin_products' %}">
+                Products
+            </a>
+
+
+            <!-- Categories -->
+
+            <a href="{% url 'admin_categories' %}">
+                Categories
+            </a>
+
+
+            <!-- Orders -->
+
+            <a href="{% url 'admin_orders' %}">
+                Orders
+            </a>
+
+
+            <!-- Customers -->
+
+            <a href="{% url 'admin_customers' %}">
+                Customers
+            </a>
+
+
+            <!-- Payments -->
+
+            <a href="{% url 'admin_payments' %}">
+                Payments
+            </a>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+
+            <h2>
+                Admin Dashboard
+            </h2>
+
+
+            <div>
+
+                Welcome, {{ request.user.username }}
+
+                &nbsp;&nbsp;
+
+                <a
+                    href="{% url 'admin_logout' %}"
+                    class="logout"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             DASHBOARD CONTENT
+        ========================= -->
+
+        <section class="content">
+
+
+            <h1>
+                Dashboard
+            </h1>
+
+
+            <p class="subtitle">
+                Welcome to SK Automobile Parts administration.
+            </p>
+
+
+
+            <!-- =========================
+                 DASHBOARD CARDS
+            ========================= -->
+
+            <div class="cards">
+
+
+                <!-- PRODUCTS -->
+
+                <a
+                    href="{% url 'admin_products' %}"
+                    class="card-link"
+                >
+
+                    <div class="card">
+
+                        <h3>
+                            Products
+                        </h3>
+
+                        <p>
+                            {{ product_count }}
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ORDERS -->
+
+                <a
+                    href="{% url 'admin_orders' %}"
+                    class="card-link"
+                >
+
+                    <div class="card">
+
+                        <h3>
+                            Orders
+                        </h3>
+
+                        <p>
+                            {{ order_count }}
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- CUSTOMERS -->
+
+                <a
+                    href="{% url 'admin_customers' %}"
+                    class="card-link"
+                >
+
+                    <div class="card">
+
+                        <h3>
+                            Customers
+                        </h3>
+
+                        <p>
+                            {{ customer_count }}
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- PAYMENTS -->
+
+                <a
+                    href="{% url 'admin_payments' %}"
+                    class="card-link"
+                >
+
+                    <div class="card">
+
+                        <h3>
+                            Payments
+                        </h3>
+
+                        <p>
+                            {{ payment_count }}
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 QUICK ACTIONS
+            ========================= -->
+
+            <h2 class="quick-title">
+                Quick Actions
+            </h2>
+
+
+
+            <div class="quick-actions">
+
+
+                <!-- PRODUCTS -->
+
+                <a
+                    href="{% url 'admin_products' %}"
+                    class="quick-action"
+                >
+
+                    <h3>
+                        Products
+                    </h3>
+
+                    <p>
+                        Manage automobile parts, prices,
+                        stock and product information.
+                    </p>
+
+                </a>
+
+
+
+                <!-- CATEGORIES -->
+
+                <a
+                    href="{% url 'admin_categories' %}"
+                    class="quick-action"
+                >
+
+                    <h3>
+                        Categories
+                    </h3>
+
+                    <p>
+                        Manage automobile parts categories.
+                    </p>
+
+                </a>
+
+
+
+                <!-- ORDERS -->
+
+                <a
+                    href="{% url 'admin_orders' %}"
+                    class="quick-action"
+                >
+
+                    <h3>
+                        Orders
+                    </h3>
+
+                    <p>
+                        View customer orders and update
+                        order status.
+                    </p>
+
+                </a>
+
+
+
+                <!-- CUSTOMERS -->
+
+                <a
+                    href="{% url 'admin_customers' %}"
+                    class="quick-action"
+                >
+
+                    <h3>
+                        Customers
+                    </h3>
+
+                    <p>
+                        View registered customers and
+                        their account information.
+                    </p>
+
+                </a>
+
+
+
+                <!-- PAYMENTS -->
+
+                <a
+                    href="{% url 'admin_payments' %}"
+                    class="quick-action"
+                >
+
+                    <h3>
+                        Payments
+                    </h3>
+
+                    <p>
+                        View customer payment transactions,
+                        payment methods and payment status.
+                    </p>
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

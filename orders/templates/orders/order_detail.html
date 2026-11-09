@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Order {{ order.order_number }} | SK Automobile Parts
+    </title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #111827;
+            color: white;
+            padding: 16px 6%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #111827;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 30px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* STATUS CARD */
+
+        .status-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .status-description {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 7px;
+        }
+
+        .status {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .status-confirmed {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-preparing {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .status-out_for_delivery {
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+
+        .status-delivered {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-cancelled {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        /* GRID */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #fafafa;
+        }
+
+        .card-header h2 {
+            font-size: 17px;
+            color: #111827;
+        }
+
+        .card-body {
+            padding: 20px 22px;
+        }
+
+        /* PRODUCTS */
+
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 17px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .product-row:first-child {
+            padding-top: 0;
+        }
+
+        .product-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+
+        .product-meta {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: #111827;
+            white-space: nowrap;
+        }
+
+        /* SUMMARY */
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .summary-row span:first-child {
+            color: #6b7280;
+        }
+
+        .summary-row span:last-child {
+            color: #111827;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .total-row {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 17px;
+            margin-top: 17px;
+        }
+
+        .total-row span {
+            font-size: 17px !important;
+            font-weight: 700 !important;
+            color: #111827 !important;
+        }
+
+        /* ADDRESS */
+
+        .address {
+            color: #4b5563;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .phone {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        /* PAYMENT */
+
+        .payment-method {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .payment-status {
+            font-size: 13px;
+            color: #047857;
+        }
+
+        .payment-pending {
+            color: #c2410c;
+        }
+
+        .transaction {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #6b7280;
+            word-break: break-all;
+        }
+
+        /* TRACK BUTTON */
+
+        .track-btn {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            text-align: center;
+            background: #111827;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .track-btn:hover {
+            background: #000;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .page-title h1 {
+                font-size: 25px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .product-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .product-price {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            SK Automobile Parts
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'shop' %}">
+                Shop
+            </a>
+
+            <a href="{% url 'cart_view' %}">
+                Cart
+            </a>
+
+            <a href="{% url 'my_orders' %}">
+                My Orders
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <a
+            href="{% url 'my_orders' %}"
+            class="back-link"
+        >
+            ← Back to My Orders
+        </a>
+
+
+        <!-- TITLE -->
+
+        <div class="page-title">
+
+            <h1>
+                Order #{{ order.order_number }}
+            </h1>
+
+            <p>
+                Placed on
+                {{ order.created_at|date:"d M Y, h:i A" }}
+            </p>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="status-card">
+
+            <div class="status-header">
+
+                <div>
+
+                    <div class="status-title">
+                        Order Status
+                    </div>
+
+                    <div class="status-description">
+
+                        {% if order.status == 'pending' %}
+                            Your order is waiting for confirmation.
+
+                        {% elif order.status == 'confirmed' %}
+                            Your order has been confirmed.
+
+                        {% elif order.status == 'preparing' %}
+                            Your order is being prepared.
+
+                        {% elif order.status == 'out_for_delivery' %}
+                            Your order is on the way.
+
+                        {% elif order.status == 'delivered' %}
+                            Your order has been delivered.
+
+                        {% elif order.status == 'cancelled' %}
+                            This order has been cancelled.
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="status status-{{ order.status }}">
+                    {{ order.get_status_display }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="details-grid">
+
+            <!-- LEFT -->
+
+            <div>
+
+                <!-- PRODUCTS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Order Items
+                        </h2>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        {% for item in order.items.all %}
+
+                            <div class="product-row">
+
+                                <div>
+
+                                    <div class="product-name">
+                                        {{ item.product.name }}
+                                    </div>
+
+                                    <div class="product-meta">
+                                        Quantity:
+                                        {{ item.quantity }}
+                                        ×
+                                        ₹{{ item.price }}
+                                    </div>
+
+                                </div>
+
+
+                                <div class="product-price">
+                                    ₹{{ item.subtotal }}
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- DELIVERY ADDRESS -->
+
+                <div class="card" style="margin-top: 20px;">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Delivery Address
+                        </h2>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="address">
+                            {{ order.shipping_address|linebreaksbr }}
+                        </div>
+
+                        <div class="phone">
+                            📞 {{ order.phone }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div>
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Order Summary
+                        </h2>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="summary-row">
+
+                            <span>
+                                Items
+                            </span>
+
+                            <span>
+                                {{ order.items.count }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Order Status
+                            </span>
+
+                            <span>
+                                {{ order.get_status_display }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row total-row">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <span>
+                                ₹{{ order.total_amount }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="card" style="margin-top: 20px;">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Payment
+                        </h2>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        {% if order.payment %}
+
+                            <div class="payment-method">
+
+                                {{ order.payment.get_payment_method_display }}
+
+                            </div>
+
+
+                            {% if order.payment.status == 'paid' %}
+
+                                <div class="payment-status">
+                                    ✓ Payment successful
+                                </div>
+
+                            {% elif order.payment.status == 'pending' %}
+
+                                <div class="payment-status payment-pending">
+                                    Payment pending
+                                </div>
+
+                            {% else %}
+
+                                <div class="payment-status payment-pending">
+                                    {{ order.payment.get_status_display }}
+                                </div>
+
+                            {% endif %}
+
+
+                            {% if order.payment.transaction_id %}
+
+                                <div class="transaction">
+
+                                    Transaction ID:
+                                    {{ order.payment.transaction_id }}
+
+                                </div>
+
+                            {% endif %}
+
+                        {% else %}
+
+                            <div class="payment-status payment-pending">
+                                Payment not completed
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- TRACK ORDER -->
+
+                {% if order.status == 'out_for_delivery' %}
+
+                   <a
+                      href="{% url 'track_order' order.id %}"
+                      class="track-btn"
+                    >  
+                       🚚 Track Live Delivery
+                    </a>
+
+                {% elif order.status == 'delivered' %}
+
+                    <a
+                        href="#"
+                        class="track-btn"
+                    >
+                        ✓ Order Delivered
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

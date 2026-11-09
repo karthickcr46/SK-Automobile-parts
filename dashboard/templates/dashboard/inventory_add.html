@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Inventory - SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #172337;
+            color: white;
+            padding-top: 25px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 25px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #2874f0;
+            color: white;
+        }
+
+        .sidebar a.active {
+            background: #2874f0;
+            color: white;
+        }
+
+        /* Main */
+
+        .main {
+            margin-left: 240px;
+            padding: 25px;
+        }
+
+        /* Top Bar */
+
+        .topbar {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background: #545b62;
+        }
+
+        /* Form */
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 850px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-container h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #2874f0;
+        }
+
+        .info-box {
+            background: #f0f6ff;
+            border-left: 4px solid #2874f0;
+            padding: 15px;
+            margin-bottom: 25px;
+            color: #444;
+        }
+
+        .help-text {
+            color: #777;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .save-btn {
+            background: #2874f0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .save-btn:hover {
+            background: #1258c7;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .cancel-btn:hover {
+            background: #545b62;
+        }
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>
+            SK Automobile Parts
+        </h2>
+
+        <a href="{% url 'dashboard_home' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'admin_products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'admin_categories' %}">
+            Categories
+        </a>
+
+        <a href="{% url 'admin_shops' %}">
+            Shops
+        </a>
+
+        <a href="{% url 'admin_inventory' %}" class="active">
+            Inventory
+        </a>
+
+        <a href="#">
+            Orders
+        </a>
+
+        <a href="#">
+            Customers
+        </a>
+
+        <a href="#">
+            Payments
+        </a>
+
+        <a href="{% url 'admin_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- Main -->
+
+    <div class="main">
+
+
+        <!-- Top Bar -->
+
+        <div class="topbar">
+
+            <h1>
+                Add Inventory
+            </h1>
+
+            <a
+                href="{% url 'admin_inventory' %}"
+                class="back-btn"
+            >
+                ← Back to Inventory
+            </a>
+
+        </div>
+
+
+        <!-- Form -->
+
+        <div class="form-container">
+
+            <h2>
+                Add Product to Shop
+            </h2>
+
+
+            <div class="info-box">
+
+                <strong>
+                    Inventory Management
+                </strong>
+
+                <p>
+                    Select a shop and product, then specify the
+                    shop-specific price and available stock.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- Shop -->
+
+                <div class="form-group">
+
+                    <label for="shop">
+                        Select Shop
+                    </label>
+
+                    <select
+                        id="shop"
+                        name="shop"
+                        required
+                    >
+
+                        <option value="">
+                            Select a shop
+                        </option>
+
+                        {% for shop in shops %}
+
+                            <option value="{{ shop.id }}">
+
+                                {{ shop.name }} -
+                                {{ shop.city }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Product -->
+
+                <div class="form-group">
+
+                    <label for="product">
+                        Select Product
+                    </label>
+
+                    <select
+                        id="product"
+                        name="product"
+                        required
+                    >
+
+                        <option value="">
+                            Select a product
+                        </option>
+
+                        {% for product in products %}
+
+                            <option value="{{ product.id }}">
+
+                                {{ product.name }}
+                                -
+                                {{ product.part_number }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Price -->
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Shop Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        step="0.01"
+                        min="0"
+                        placeholder="Example: 450.00"
+                        required
+                    >
+
+                    <div class="help-text">
+                        Enter the price charged by this particular shop.
+                    </div>
+
+                </div>
+
+
+                <!-- Stock -->
+
+                <div class="form-group">
+
+                    <label for="stock">
+                        Available Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        id="stock"
+                        name="stock"
+                        min="0"
+                        placeholder="Example: 10"
+                        required
+                    >
+
+                    <div class="help-text">
+                        Enter how many units are currently available.
+                    </div>
+
+                </div>
+
+
+                <!-- Availability -->
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        id="is_available"
+                        name="is_available"
+                        checked
+                    >
+
+                    <label for="is_available">
+                        Product is available for customer orders
+                    </label>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save Inventory
+                    </button>
+
+                    <a
+                        href="{% url 'admin_inventory' %}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | SK Automobile Parts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            color: #222;
+        }
+
+        .navbar {
+            background: #111827;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-name {
+            font-weight: bold;
+        }
+
+        .item-quantity {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .continue-btn {
+            width: 100%;
+            border: none;
+            background: #111827;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .continue-btn:hover {
+            background: #1f2937;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #111827;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 15px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">SK Automobile Parts</div>
+
+    <div>
+        <a href="{% url 'shop' %}">Shop</a>
+        <a href="{% url 'cart_view' %}">Cart</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Checkout</h1>
+
+    <div class="checkout-grid">
+
+        <div class="card">
+
+            <h2>Delivery Details</h2>
+
+            {% if error %}
+                <div class="error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    value="{{ phone|default:'' }}"
+                    required
+                >
+
+                <label for="shipping_address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="shipping_address"
+                    name="shipping_address"
+                    placeholder="Enter your complete delivery address"
+                    required
+                >{{ shipping_address|default:'' }}</textarea>
+
+                <button
+                    type="submit"
+                    class="continue-btn"
+                >
+                    Continue to Payment
+                </button>
+
+            </form>
+
+            <a
+                href="{% url 'cart_view' %}"
+                class="back"
+            >
+                ← Back to Cart
+            </a>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Order Summary</h2>
+
+            {% for item in cart.items.all %}
+
+                <div class="item">
+
+                    <div>
+                        <div class="item-name">
+                            {{ item.product.name }}
+                        </div>
+
+                        <div class="item-quantity">
+                            Qty: {{ item.quantity }}
+                        </div>
+                    </div>
+
+                    <div>
+                        ₹{{ item.subtotal }}
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+            <div class="total">
+                <span>Total</span>
+                <span>₹{{ cart.total_price }}</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

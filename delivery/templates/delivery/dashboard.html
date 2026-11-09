@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Delivery Dashboard | SK Automobile Parts
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #111827;
+            color: white;
+
+            padding: 16px 5%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .logo {
+            color: white;
+            text-decoration: none;
+
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+
+        .user-name {
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+
+        .logout-btn {
+            color: white;
+            text-decoration: none;
+
+            background: #374151;
+
+            padding: 9px 14px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+        }
+
+
+        .logout-btn:hover {
+            background: #4b5563;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+
+            margin: 35px auto;
+        }
+
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+
+        .page-header h1 {
+            font-size: 28px;
+            color: #111827;
+
+            margin-bottom: 7px;
+        }
+
+
+        .page-header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+
+        /* CARD */
+
+        .card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.04);
+
+            margin-bottom: 20px;
+        }
+
+
+        .card-header {
+            padding: 18px 22px;
+
+            background: #fafafa;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+
+        .card-header h2 {
+            font-size: 17px;
+            color: #111827;
+        }
+
+
+        .card-body {
+            padding: 22px;
+        }
+
+
+        /* DELIVERY ITEM */
+
+        .delivery-item {
+            border: 1px solid #e5e7eb;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .delivery-item:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .delivery-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .order-number {
+            font-size: 17px;
+
+            font-weight: 700;
+
+            color: #111827;
+        }
+
+
+        .status-badge {
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            background: #f5f3ff;
+
+            color: #6d28d9;
+        }
+
+
+        /* INFORMATION */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .info-label {
+            color: #6b7280;
+
+            font-size: 12px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-value {
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .address {
+            line-height: 1.6;
+        }
+
+
+        /* ACTIONS */
+
+        .actions {
+            border-top: 1px solid #e5e7eb;
+
+            padding-top: 18px;
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .action-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            border: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .action-btn:hover {
+            background: #000;
+        }
+
+
+        .action-btn:disabled {
+            background: #9ca3af;
+
+            cursor: not-allowed;
+        }
+
+
+        .secondary-btn {
+            background: #e5e7eb;
+
+            color: #111827;
+        }
+
+
+        .secondary-btn:hover {
+            background: #d1d5db;
+        }
+
+
+        /* LOCATION STATUS */
+
+        .location-status {
+            display: none;
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 12px 14px;
+
+            border-radius: 7px;
+
+            background: #eff6ff;
+
+            border: 1px solid #bfdbfe;
+
+            color: #1d4ed8;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .location-status.active {
+            display: block;
+        }
+
+
+        .location-status.success {
+            background: #ecfdf5;
+
+            border-color: #a7f3d0;
+
+            color: #047857;
+        }
+
+
+        .location-status.error {
+            background: #fef2f2;
+
+            border-color: #fecaca;
+
+            color: #dc2626;
+        }
+
+
+        .location-status.warning {
+            background: #fff7ed;
+
+            border-color: #fed7aa;
+
+            color: #c2410c;
+        }
+
+
+        .location-details {
+            margin-top: 6px;
+
+            font-size: 12px;
+
+            color: inherit;
+        }
+
+
+        /* LIVE INDICATOR */
+
+        .live-indicator {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 12px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #047857;
+        }
+
+
+        .live-dot {
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #10b981;
+
+            animation: pulse 1.5s infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+
+            padding: 40px 20px;
+
+            color: #6b7280;
+        }
+
+
+        .empty h3 {
+            margin-bottom: 8px;
+
+            color: #374151;
+        }
+
+
+        .empty p {
+            font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 4%;
+            }
+
+
+            .nav-right {
+                gap: 10px;
+            }
+
+
+            .user-name {
+                display: none;
+            }
+
+
+            .container {
+                width: 94%;
+
+                margin: 25px auto;
+            }
+
+
+            .delivery-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .actions {
+                flex-direction: column;
+            }
+
+
+            .action-btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a
+            href="{% url 'delivery_dashboard' %}"
+            class="logo"
+        >
+            SK Automobile Parts
+        </a>
+
+
+        <div class="nav-right">
+
+            <span class="user-name">
+
+                Welcome,
+                {{ request.user.username }}
+
+            </span>
+
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="page-header">
+
+            <h1>
+                Delivery Dashboard
+            </h1>
+
+            <p>
+                View your assigned orders and manage deliveries.
+            </p>
+
+        </div>
+
+
+
+        <!-- ASSIGNED ORDERS -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    My Assigned Deliveries
+                </h2>
+
+            </div>
+
+
+            <div class="card-body">
+
+
+                {% if deliveries %}
+
+
+                    {% for delivery in deliveries %}
+
+
+                        <div
+                            class="delivery-item"
+                            data-order-id="{{ delivery.order.id }}"
+                        >
+
+
+                            <!-- DELIVERY HEADER -->
+
+                            <div class="delivery-header">
+
+
+                                <div class="order-number">
+
+                                    Order #{{ delivery.order.order_number }}
+
+                                </div>
+
+
+                                <div class="status-badge">
+
+                                    {{ delivery.get_status_display }}
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- INFORMATION -->
+
+                            <div class="info-grid">
+
+
+                                <div>
+
+                                    <div class="info-label">
+                                        Customer
+                                    </div>
+
+                                    <div class="info-value">
+
+                                        {{ delivery.order.customer.username }}
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div>
+
+                                    <div class="info-label">
+                                        Phone
+                                    </div>
+
+                                    <div class="info-value">
+
+                                        {{ delivery.order.phone }}
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div>
+
+                                    <div class="info-label">
+                                        Order Amount
+                                    </div>
+
+                                    <div class="info-value">
+
+                                        ₹{{ delivery.order.total_amount }}
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div>
+
+                                    <div class="info-label">
+                                        Order Status
+                                    </div>
+
+                                    <div class="info-value">
+
+                                        {{ delivery.order.get_status_display }}
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="info-row">
+
+                                <div class="info-label">
+                                    Delivery Address
+                                </div>
+
+                                <div class="info-value address">
+
+                                    {{ delivery.order.shipping_address|linebreaksbr }}
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="actions">
+
+
+                                {% if delivery.status == 'out_for_delivery' %}
+
+
+                                    <!-- CSRF TOKEN -->
+
+                                    <form
+                                        class="location-form"
+                                        data-order-id="{{ delivery.order.id }}"
+                                    >
+
+                                        {% csrf_token %}
+
+                                    </form>
+
+
+                                    <!-- START LIVE LOCATION -->
+
+                                    <button
+                                        type="button"
+                                        class="action-btn start-location-btn"
+                                        data-order-id="{{ delivery.order.id }}"
+                                        data-location-url="{% url 'update_delivery_location' delivery.order.id %}"
+                                    >
+
+                                        Start Live Location
+
+                                    </button>
+
+
+                                    <!-- STOP LIVE LOCATION -->
+
+                                    <button
+                                        type="button"
+                                        class="action-btn secondary-btn stop-location-btn"
+                                        data-order-id="{{ delivery.order.id }}"
+                                        style="display: none;"
+                                    >
+
+                                        Stop Live Location
+
+                                    </button>
+
+
+                                    <!-- LOCATION STATUS -->
+
+                                    <div
+                                        class="location-status"
+                                        id="location-status-{{ delivery.order.id }}"
+                                    >
+
+                                        <strong>
+                                            Live Location
+                                        </strong>
+
+                                        <div class="location-details">
+                                            Waiting for GPS location...
+                                        </div>
+
+                                    </div>
+
+
+                                {% elif delivery.status == 'assigned' %}
+
+
+                                    <span class="action-btn secondary-btn">
+
+                                        Waiting for pickup
+
+                                    </span>
+
+
+                                {% elif delivery.status == 'picked_up' %}
+
+
+                                    <span class="action-btn secondary-btn">
+
+                                        Picked Up
+
+                                    </span>
+
+
+                                {% elif delivery.status == 'delivered' %}
+
+
+                                    <span class="action-btn secondary-btn">
+
+                                        Delivered
+
+                                    </span>
+
+
+                                {% else %}
+
+
+                                    <span class="action-btn secondary-btn">
+
+                                        {{ delivery.get_status_display }}
+
+                                    </span>
+
+
+                                {% endif %}
+
+
+
+                                <!-- VIEW ORDER -->
+
+                                <a
+                                    href="/orders/detail/{{ delivery.order.id }}/"
+                                    class="action-btn secondary-btn"
+                                >
+
+                                    View Order
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                {% else %}
+
+
+                    <div class="empty">
+
+                        <h3>
+                            No Assigned Deliveries
+                        </h3>
+
+                        <p>
+                            You currently have no orders assigned to you.
+                        </p>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- LIVE LOCATION JAVASCRIPT -->
+
+    <script>
+
+        /*
+         * Store the active browser GPS watches.
+         *
+         * Key   = order ID
+         * Value = browser watchPosition ID
+         */
+
+        const activeLocationWatches = {};
+
+
+
+        /*
+         * Store the last time a location
+         * was sent to Django.
+         *
+         * This prevents too many requests.
+         */
+
+        const lastLocationSent = {};
+
+
+
+        /*
+         * Send the current GPS coordinates
+         * to the Django backend.
+         */
+
+        async function sendLocation(
+            orderId,
+            latitude,
+            longitude,
+            locationUrl,
+            statusElement
+        ) {
+
+            const now = Date.now();
+
+            /*
+             * Send at most one location update
+             * every 5 seconds for each order.
+             */
+
+            if (
+                lastLocationSent[orderId] &&
+                now - lastLocationSent[orderId] < 5000
+            ) {
+
+                return;
+
+            }
+
+
+            lastLocationSent[orderId] = now;
+
+
+
+            /*
+             * Get CSRF token.
+             */
+
+            const csrfInput =
+                document.querySelector(
+                    `.location-form[data-order-id="${orderId}"] input[name="csrfmiddlewaretoken"]`
+                );
+
+
+            if (!csrfInput) {
+
+                statusElement.className =
+                    "location-status active error";
+
+                statusElement.innerHTML = `
+                    <strong>
+                        Error
+                    </strong>
+
+                    <div class="location-details">
+                        CSRF token was not found.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            const csrfToken = csrfInput.value;
+
+
+
+            /*
+             * Prepare POST data.
+             */
+
+            const formData = new URLSearchParams();
+
+            formData.append(
+                "latitude",
+                latitude
+            );
+
+            formData.append(
+                "longitude",
+                longitude
+            );
+
+
+
+            try {
+
+                const response = await fetch(
+                    locationUrl,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded",
+
+                            "X-CSRFToken":
+                                csrfToken,
+
+                            "X-Requested-With":
+                                "XMLHttpRequest"
+                        },
+
+                        credentials: "same-origin",
+
+                        body: formData.toString()
+                    }
+                );
+
+
+
+                const data =
+                    await response.json();
+
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to update delivery location."
+                    );
+
+                }
+
+
+
+                /*
+                 * Show successful update.
+                 */
+
+                statusElement.className =
+                    "location-status active success";
+
+
+                statusElement.innerHTML = `
+
+                    <strong>
+                        Live location is active
+                    </strong>
+
+                    <div class="live-indicator">
+
+                        <span class="live-dot"></span>
+
+                        Location sharing is active
+
+                    </div>
+
+                    <div class="location-details">
+
+                        Latitude:
+                        ${Number(data.latitude).toFixed(6)}
+
+                        <br>
+
+                        Longitude:
+                        ${Number(data.longitude).toFixed(6)}
+
+                        <br>
+
+                        Last updated:
+                        ${new Date().toLocaleTimeString()}
+
+                    </div>
+
+                `;
+
+
+            } catch (error) {
+
+                console.error(
+                    "Location update error:",
+                    error
+                );
+
+
+                statusElement.className =
+                    "location-status active error";
+
+
+                statusElement.innerHTML = `
+
+                    <strong>
+                        Location update failed
+                    </strong>
+
+                    <div class="location-details">
+
+                        ${error.message}
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        /*
+         * Start GPS tracking.
+         */
+
+        function startLocationTracking(
+            orderId,
+            locationUrl
+        ) {
+
+            const statusElement =
+                document.getElementById(
+                    `location-status-${orderId}`
+                );
+
+
+            const startButton =
+                document.querySelector(
+                    `.start-location-btn[data-order-id="${orderId}"]`
+                );
+
+
+            const stopButton =
+                document.querySelector(
+                    `.stop-location-btn[data-order-id="${orderId}"]`
+                );
+
+
+
+            if (!navigator.geolocation) {
+
+                statusElement.className =
+                    "location-status active error";
+
+
+                statusElement.innerHTML = `
+
+                    <strong>
+                        GPS Not Supported
+                    </strong>
+
+                    <div class="location-details">
+
+                        Your browser does not support
+                        geolocation.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            /*
+             * Prevent starting multiple watches
+             * for the same order.
+             */
+
+            if (
+                activeLocationWatches[orderId] !== undefined
+            ) {
+
+                return;
+
+            }
+
+
+
+            statusElement.className =
+                "location-status active";
+
+
+            statusElement.innerHTML = `
+
+                <strong>
+                    Getting your location...
+                </strong>
+
+                <div class="location-details">
+
+                    Please allow location access
+                    when your browser asks.
+
+                </div>
+
+            `;
+
+
+            startButton.style.display =
+                "none";
+
+
+            stopButton.style.display =
+                "inline-block";
+
+
+
+            /*
+             * Start browser GPS watch.
+             */
+
+            const watchId =
+                navigator.geolocation.watchPosition(
+
+                    function(position) {
+
+                        const latitude =
+                            position.coords.latitude;
+
+
+                        const longitude =
+                            position.coords.longitude;
+
+
+
+                        sendLocation(
+                            orderId,
+                            latitude,
+                            longitude,
+                            locationUrl,
+                            statusElement
+                        );
+
+                    },
+
+
+                    function(error) {
+
+                        console.error(
+                            "GPS error:",
+                            error
+                        );
+
+
+                        statusElement.className =
+                            "location-status active error";
+
+
+                        let message =
+                            "Unable to get your location.";
+
+
+                        if (
+                            error.code ===
+                            error.PERMISSION_DENIED
+                        ) {
+
+                            message =
+                                "Location permission was denied. Please allow location access in your browser.";
+
+                        }
+
+
+                        else if (
+                            error.code ===
+                            error.POSITION_UNAVAILABLE
+                        ) {
+
+                            message =
+                                "Your current location is unavailable. Please check your GPS/location settings.";
+
+                        }
+
+
+                        else if (
+                            error.code ===
+                            error.TIMEOUT
+                        ) {
+
+                            message =
+                                "The GPS request timed out. Please try again.";
+
+                        }
+
+
+
+                        statusElement.innerHTML = `
+
+                            <strong>
+                                Location Error
+                            </strong>
+
+                            <div class="location-details">
+
+                                ${message}
+
+                            </div>
+
+                        `;
+
+
+                        /*
+                         * Stop the watch if
+                         * location permission fails.
+                         */
+
+                        stopLocationTracking(
+                            orderId
+                        );
+
+                    },
+
+
+                    {
+                        enableHighAccuracy: true,
+
+                        maximumAge: 5000,
+
+                        timeout: 15000
+
+                    }
+
+                );
+
+
+
+            activeLocationWatches[orderId] =
+                watchId;
+
+        }
+
+
+
+        /*
+         * Stop GPS tracking.
+         */
+
+        function stopLocationTracking(
+            orderId
+        ) {
+
+            const watchId =
+                activeLocationWatches[orderId];
+
+
+            if (watchId !== undefined) {
+
+                navigator.geolocation.clearWatch(
+                    watchId
+                );
+
+            }
+
+
+            delete activeLocationWatches[
+                orderId
+            ];
+
+
+            delete lastLocationSent[
+                orderId
+            ];
+
+
+
+            const startButton =
+                document.querySelector(
+                    `.start-location-btn[data-order-id="${orderId}"]`
+                );
+
+
+            const stopButton =
+                document.querySelector(
+                    `.stop-location-btn[data-order-id="${orderId}"]`
+                );
+
+
+            const statusElement =
+                document.getElementById(
+                    `location-status-${orderId}`
+                );
+
+
+
+            if (startButton) {
+
+                startButton.style.display =
+                    "inline-block";
+
+            }
+
+
+            if (stopButton) {
+
+                stopButton.style.display =
+                    "none";
+
+            }
+
+
+            if (statusElement) {
+
+                statusElement.className =
+                    "location-status active warning";
+
+
+                statusElement.innerHTML = `
+
+                    <strong>
+                        Live location stopped
+                    </strong>
+
+                    <div class="location-details">
+
+                        Your location is no longer
+                        being sent to the server.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        /*
+         * START buttons.
+         */
+
+        document.querySelectorAll(
+            ".start-location-btn"
+        ).forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const orderId =
+                            this.dataset.orderId;
+
+
+                        const locationUrl =
+                            this.dataset.locationUrl;
+
+
+                        startLocationTracking(
+                            orderId,
+                            locationUrl
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /*
+         * STOP buttons.
+         */
+
+        document.querySelectorAll(
+            ".stop-location-btn"
+        ).forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const orderId =
+                            this.dataset.orderId;
+
+
+                        stopLocationTracking(
+                            orderId
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /*
+         * Stop GPS automatically when
+         * the delivery person leaves
+         * the page.
+         */
+
+        window.addEventListener(
+            "beforeunload",
+            function() {
+
+                Object.keys(
+                    activeLocationWatches
+                ).forEach(
+                    function(orderId) {
+
+                        stopLocationTracking(
+                            orderId
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
