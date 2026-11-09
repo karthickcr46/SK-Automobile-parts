@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Successful</title>
+
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f5f7fb;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        .success {
+
+            background: white;
+
+            max-width: 600px;
+
+            width: 90%;
+
+            padding: 40px;
+
+            text-align: center;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.1);
+
+        }
+
+
+        .icon {
+
+            font-size: 60px;
+
+        }
+
+
+        h1 {
+
+            color: #16a34a;
+
+            margin: 15px 0;
+
+        }
+
+
+        .details {
+
+            text-align: left;
+
+            background: #f8fafc;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-top: 25px;
+
+        }
+
+
+        .details p {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .button {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 13px 25px;
+
+            background: #111827;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="success">
+
+
+    <div class="icon">
+        ✅
+    </div>
+
+
+    <h1>
+        Order Successful!
+    </h1>
+
+
+    <p>
+        Thank you for shopping with
+        SK Automobile Parts.
+    </p>
+
+
+    <div class="details">
+
+        <p>
+
+            <strong>
+                Order ID:
+            </strong>
+
+            #{{ order.id }}
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Total:
+            </strong>
+
+            ₹{{ order.total_amount }}
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Payment Method:
+            </strong>
+
+            {{ order.get_payment_method_display }}
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Payment Status:
+            </strong>
+
+            {{ order.payment_status }}
+
+        </p>
+
+
+        {% if order.payment_id %}
+
+            <p>
+
+                <strong>
+                    Transaction ID:
+                </strong>
+
+                {{ order.payment_id }}
+
+            </p>
+
+        {% endif %}
+
+
+        <p>
+
+            <strong>
+                Order Status:
+            </strong>
+
+            {{ order.get_order_status_display }}
+
+        </p>
+
+    </div>
+
+
+    <p style="margin-top: 20px;">
+
+        Order confirmation has been sent
+        to {{ order.customer.email }}.
+
+    </p>
+
+
+    <a
+        href="{% url 'home' %}"
+        class="button"
+    >
+
+        Continue Shopping
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

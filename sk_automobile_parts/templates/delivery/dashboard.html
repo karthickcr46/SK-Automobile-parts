@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Delivery Dashboard</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <style>
+
+        
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --dark: #111827;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --background: #f1f5f9;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning-bg: #fff7ed;
+    --warning-text: #c2410c;
+}
+
+/* BODY */
+
+body {
+    margin: 0;
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            #dbeafe 0,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f8fafc,
+            #eef2ff
+        );
+
+    color: var(--text);
+    min-height: 100vh;
+}
+
+
+/* HEADER */
+
+.header {
+    min-height: 82px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #1e293b
+        );
+
+    color: white;
+
+    padding: 18px 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.18);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header h2 {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 750;
+
+    letter-spacing: -0.3px;
+}
+
+.header a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    text-decoration: none;
+
+    padding: 9px 16px;
+
+    border-radius: 9px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(255,255,255,0.08);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.header a:hover {
+    background: white;
+    color: var(--dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.2);
+}
+
+
+/* MAIN CONTAINER */
+
+.container {
+    width: min(1000px, 92%);
+
+    margin: 0 auto;
+
+    padding: 38px 0 60px;
+}
+
+
+/* PAGE TITLE */
+
+.container > h1 {
+    margin: 0 0 25px;
+
+    font-size: 30px;
+
+    color: var(--dark);
+
+    letter-spacing: -0.7px;
+}
+
+
+/* ORDER CARD */
+
+.order-card {
+    background:
+        rgba(255,255,255,0.96);
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(226,232,240,0.9);
+
+    box-shadow:
+        0 8px 30px rgba(15,23,42,0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* BLUE TOP LINE */
+
+.order-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #60a5fa,
+            #818cf8
+        );
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,0.11);
+
+    border-color: #bfdbfe;
+}
+
+
+/* ORDER TITLE */
+
+.order-card h2 {
+    margin: 0 0 20px;
+
+    font-size: 21px;
+
+    color: var(--dark);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-card h2::before {
+    content: "📦";
+
+    font-size: 20px;
+}
+
+
+/* INFORMATION */
+
+.order-card p {
+    margin: 11px 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.order-card p strong {
+    color: var(--text);
+
+    font-weight: 650;
+}
+
+
+/* STATUS */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 13px;
+
+    border-radius: 50px;
+
+    background: #dbeafe;
+
+    color: var(--primary-dark);
+
+    border: 1px solid #bfdbfe;
+
+    font-weight: 700;
+
+    font-size: 12px;
+}
+
+.status::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,0.12);
+}
+
+
+/* START BUTTON */
+
+.start-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    margin-top: 18px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 6px 16px rgba(37,99,235,0.25);
+
+    transition: all 0.25s ease;
+}
+
+.start-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(37,99,235,0.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #1e40af
+        );
+}
+
+.start-button:active {
+    transform: translateY(0);
+}
+
+
+/* STOP BUTTON */
+
+.stop-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        );
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    margin-top: 18px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 6px 16px rgba(220,38,38,0.22);
+
+    transition: all 0.25s ease;
+}
+
+.stop-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(220,38,38,0.3);
+
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #b91c1c
+        );
+}
+
+.stop-button:active {
+    transform: translateY(0);
+}
+
+
+/* MESSAGE */
+
+.message {
+    margin-top: 15px;
+
+    padding: 13px 16px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    transition: all 0.25s ease;
+}
+
+
+/* DISABLED MESSAGE */
+
+.disabled {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #64748b;
+
+    margin-top: 18px !important;
+
+    padding: 14px 16px;
+
+    background: var(--warning-bg);
+
+    border: 1px solid #fed7aa;
+
+    border-radius: 10px;
+
+    font-size: 13px !important;
+}
+
+
+/* NO ORDERS */
+
+.order-card:has(h3) {
+    text-align: center;
+
+    padding: 55px 25px;
+}
+
+.order-card h3 {
+    margin: 0 0 10px;
+
+    font-size: 21px;
+
+    color: var(--dark);
+}
+
+.order-card h3::before {
+    content: "🚚";
+
+    display: block;
+
+    font-size: 42px;
+
+    margin-bottom: 15px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 16px 5%;
+
+        min-height: 70px;
+    }
+
+    .header h2 {
+        font-size: 17px;
+    }
+
+    .header a {
+        padding: 8px 12px;
+
+        font-size: 12px;
+    }
+
+    .container {
+        width: 94%;
+
+        padding-top: 25px;
+    }
+
+    .container > h1 {
+        font-size: 24px;
+    }
+
+    .order-card {
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+    .order-card h2 {
+        font-size: 18px;
+    }
+
+    .start-button,
+    .stop-button {
+        width: 100%;
+    }
+
+    .message {
+        font-size: 12px;
+    }
+}
+
+
+/* SMALL PHONES */
+
+@media (max-width: 420px) {
+
+    .header {
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .header h2 {
+        max-width: 210px;
+    }
+
+    .container > h1 {
+        font-size: 22px;
+    }
+
+    .order-card {
+        padding: 17px;
+    }
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <h2>🚚 Delivery Partner Dashboard</h2>
+
+    <a href="{% url 'delivery_logout' %}">
+        Logout
+    </a>
+
+</div>
+
+
+<div class="container">
+
+    <h1>My Orders</h1>
+
+
+    {% for order in orders %}
+
+        <div class="order-card">
+
+            <h2>
+                Order #{{ order.id }}
+            </h2>
+
+            <p>
+                <strong>Customer:</strong>
+                {{ order.customer.name }}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                {{ order.customer.phone }}
+            </p>
+
+            <p>
+                <strong>Address:</strong>
+                {{ order.address }}
+            </p>
+
+            <p>
+                <strong>Amount:</strong>
+                ₹{{ order.total_amount }}
+            </p>
+
+            <p>
+
+                <strong>Status:</strong>
+
+                <span class="status">
+                    {{ order.get_order_status_display }}
+                </span>
+
+            </p>
+
+
+            {% if order.order_status == "OUT_FOR_DELIVERY" %}
+
+                <button
+                    class="start-button"
+                    id="start-{{ order.id }}"
+                    data-order-id="{{ order.id }}"
+                    onclick="startTracking(this.dataset.orderId)">
+
+                    📍 Start Live Location
+
+                </button>
+
+
+                <button
+                    class="stop-button"
+                    id="stop-{{ order.id }}"
+                    data-order-id="{{ order.id }}"
+                    onclick="stopTracking(this.dataset.orderId)"
+                    style="display:none;">
+
+                    ⛔ Stop Live Location
+
+                </button>
+
+
+                <div
+                    class="message"
+                    id="message-{{ order.id }}">
+
+                    Live location has not started.
+
+                </div>
+
+
+            {% else %}
+
+                <p class="disabled">
+
+                    🔒 Live location becomes available when
+                    the order is <strong>Out for Delivery</strong>.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+    {% empty %}
+
+        <div class="order-card">
+
+            <h3>No orders assigned</h3>
+
+            <p>
+                You currently have no delivery orders.
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+<script>
+
+const tracking = {};
+
+
+function startTracking(orderId) {
+
+    if (!navigator.geolocation) {
+
+        showMessage(
+            orderId,
+            "GPS is not supported by this browser."
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        orderId,
+        "Requesting GPS permission..."
+    );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            showMessage(
+                orderId,
+                "GPS permission granted. Live location started."
+            );
+
+
+            document.getElementById(
+                "start-" + orderId
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "stop-" + orderId
+            ).style.display = "inline-block";
+
+
+            tracking[orderId] = navigator.geolocation.watchPosition(
+
+                function(position) {
+
+                    sendLocation(
+                        orderId,
+                        position
+                    );
+
+                },
+
+                function(error) {
+
+                    showMessage(
+                        orderId,
+                        "GPS error: " + error.message
+                    );
+
+                },
+
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 3000,
+                    timeout: 10000
+                }
+
+            );
+
+        },
+
+        function(error) {
+
+            showMessage(
+                orderId,
+                "GPS permission denied or unavailable."
+            );
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+
+    );
+
+}
+
+
+function stopTracking(orderId) {
+
+    if (tracking[orderId] !== undefined) {
+
+        navigator.geolocation.clearWatch(
+            tracking[orderId]
+        );
+
+        delete tracking[orderId];
+
+    }
+
+
+    document.getElementById(
+        "start-" + orderId
+    ).style.display = "inline-block";
+
+
+    document.getElementById(
+        "stop-" + orderId
+    ).style.display = "none";
+
+
+    showMessage(
+        orderId,
+        "Live location stopped."
+    );
+
+}
+
+
+function sendLocation(orderId, position) {
+
+    const latitude =
+        position.coords.latitude;
+
+    const longitude =
+        position.coords.longitude;
+
+    const accuracy =
+        position.coords.accuracy;
+
+
+    fetch(
+        `/orders/delivery/${orderId}/location/`,
+        {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json",
+
+                "X-CSRFToken":
+                    getCookie("csrftoken")
+
+            },
+
+            body: JSON.stringify({
+
+                latitude: latitude,
+
+                longitude: longitude,
+
+                accuracy: accuracy
+
+            })
+
+        }
+
+    )
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server rejected location"
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        showMessage(
+            orderId,
+            "📍 Location updated: " +
+            latitude.toFixed(6) +
+            ", " +
+            longitude.toFixed(6)
+        );
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        showMessage(
+            orderId,
+            "Unable to send location to server."
+        );
+
+    });
+
+}
+
+
+function showMessage(orderId, message) {
+
+    const element =
+        document.getElementById(
+            "message-" + orderId
+        );
+
+    if (element) {
+
+        element.innerText = message;
+
+    }
+
+}
+
+
+function getCookie(name) {
+
+    let cookieValue = null;
+
+    if (document.cookie &&
+        document.cookie !== "") {
+
+        const cookies =
+            document.cookie.split(";");
+
+        for (
+            let i = 0;
+            i < cookies.length;
+            i++
+        ) {
+
+            const cookie =
+                cookies[i].trim();
+
+            if (
+                cookie.substring(
+                    0,
+                    name.length + 1
+                ) === name + "="
+            ) {
+
+                cookieValue =
+                    decodeURIComponent(
+                        cookie.substring(
+                            name.length + 1
+                        )
+                    );
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    return cookieValue;
+
+}
+
+</script>
+
+</body>
+
+</html>

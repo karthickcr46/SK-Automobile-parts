@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Delivery Partner GPS</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            padding: 30px;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #111827;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .location {
+            margin-top: 25px;
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>🚚 Delivery Partner</h1>
+
+    <h2>
+        Order #SK{{ order.id }}
+    </h2>
+
+    <p id="status">
+        GPS tracking is stopped.
+    </p>
+
+    <button
+        id="trackingButton"
+        onclick="startTracking()"
+    >
+        Start Delivery Tracking
+    </button>
+
+    <div class="location">
+
+        <p>
+            <strong>Latitude:</strong>
+            <span id="latitude">---</span>
+        </p>
+
+        <p>
+            <strong>Longitude:</strong>
+            <span id="longitude">---</span>
+        </p>
+
+        <p>
+            <strong>Accuracy:</strong>
+            <span id="accuracy">---</span>
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let watchId = null;
+
+
+function getCookie(name) {
+
+    let cookieValue = null;
+
+    if (document.cookie &&
+        document.cookie !== '') {
+
+        const cookies =
+            document.cookie.split(';');
+
+        for (let cookie of cookies) {
+
+            cookie = cookie.trim();
+
+            if (
+                cookie.substring(
+                    0,
+                    name.length + 1
+                ) === name + '='
+            ) {
+
+                cookieValue =
+                    decodeURIComponent(
+                        cookie.substring(
+                            name.length + 1
+                        )
+                    );
+
+                break;
+            }
+        }
+    }
+
+    return cookieValue;
+}
+
+
+function startTracking() {
+
+    const status =
+        document.getElementById("status");
+
+    if (!navigator.geolocation) {
+
+        status.innerText =
+            "GPS is not supported.";
+
+        return;
+    }
+
+    status.innerText =
+        "Requesting GPS permission...";
+
+
+    watchId =
+        navigator.geolocation.watchPosition(
+
+            function(position) {
+
+                const latitude =
+                    position.coords.latitude;
+
+                const longitude =
+                    position.coords.longitude;
+
+                const accuracy =
+                    position.coords.accuracy;
+
+
+                document.getElementById(
+                    "latitude"
+                ).innerText =
+                    latitude.toFixed(7);
+
+
+                document.getElementById(
+                    "longitude"
+                ).innerText =
+                    longitude.toFixed(7);
+
+
+                document.getElementById(
+                    "accuracy"
+                ).innerText =
+                    Math.round(accuracy)
+                    + " meters";
+
+
+                status.innerText =
+                    "🟢 GPS tracking is LIVE";
+
+
+                sendLocation(
+                    latitude,
+                    longitude,
+                    accuracy
+                );
+
+            },
+
+            function(error) {
+
+                status.innerText =
+                    "Unable to get GPS location.";
+
+                console.log(error);
+
+            },
+
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 5000
+            }
+        );
+}
+
+
+function sendLocation(
+    latitude,
+    longitude,
+    accuracy
+) {
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "latitude",
+        latitude
+    );
+
+    formData.append(
+        "longitude",
+        longitude
+    );
+
+    formData.append(
+        "accuracy",
+        accuracy
+    );
+
+
+    fetch(
+        "{% url 'update_delivery_location' order.id %}",
+        {
+            method: "POST",
+
+            headers: {
+                "X-CSRFToken":
+                    getCookie("csrftoken")
+            },
+
+            body: formData
+        }
+    )
+
+    .then(response =>
+        response.json()
+    )
+
+    .then(data => {
+
+        console.log(
+            "GPS sent:",
+            data
+        );
+
+    })
+
+    .catch(error => {
+
+        console.log(
+            "GPS error:",
+            error
+        );
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bike Spare Parts</title>
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #f4f6f8;
+
+            color: #1f2937;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #111827;
+
+            color: white;
+
+            padding: 18px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+
+        .logo {
+            font-size: 24px;
+
+            font-weight: bold;
+        }
+
+
+        .cart-btn {
+            background: white;
+
+            color: #111827;
+
+            text-decoration: none;
+
+            padding: 10px 18px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .cart-btn:hover {
+            background: #e5e7eb;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: 40px auto;
+        }
+
+
+        .page-heading {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .page-heading h1 {
+            font-size: 34px;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+        }
+
+
+        .page-heading p {
+            color: #6b7280;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           SEARCH SECTION
+        ========================= */
+
+        .search-section {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, 0.06);
+        }
+
+
+        .search-form {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .search-form input,
+        .search-form select {
+            flex: 1;
+
+            min-width: 220px;
+
+            padding: 12px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        .search-form input:focus,
+        .search-form select:focus {
+            border-color: #111827;
+        }
+
+
+        .search-form button {
+            padding: 12px 25px;
+
+            background: #111827;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .search-form button:hover {
+            background: #000000;
+        }
+
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .products {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .product-card {
+            background: white;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
+            transition: 0.25s;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .product-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================
+           PRODUCT IMAGE
+        ========================= */
+
+        .product-image {
+            width: 100%;
+
+            height: 220px;
+
+            background: #f8fafc;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+
+        .product-image img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 15px;
+
+            transition: 0.3s;
+        }
+
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+
+        /* =========================
+           PRODUCT INFORMATION
+        ========================= */
+
+        .product-info {
+            padding: 20px;
+
+            flex: 1;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .product-info h2 {
+            font-size: 20px;
+
+            margin-bottom: 10px;
+
+            color: #111827;
+        }
+
+
+        .description {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 12px;
+        }
+
+
+        .bike-model {
+            display: inline-block;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            padding: 6px 10px;
+
+            border-radius: 5px;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+
+            width: fit-content;
+        }
+
+
+        .price {
+            font-size: 23px;
+
+            font-weight: bold;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+        }
+
+
+        .stock {
+            font-size: 14px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .stock.available {
+            color: #15803d;
+        }
+
+
+        .stock.unavailable {
+            color: #dc2626;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .add-cart {
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            padding: 12px;
+
+            background: #111827;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+
+            margin-top: auto;
+        }
+
+
+        .add-cart:hover {
+            background: #000000;
+        }
+
+
+        .disabled-btn {
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            padding: 12px;
+
+            background: #d1d5db;
+
+            color: #6b7280;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            cursor: not-allowed;
+
+            margin-top: auto;
+        }
+
+
+        /* =========================
+           NO PRODUCTS
+        ========================= */
+
+        .no-products {
+            background: white;
+
+            padding: 60px 20px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            grid-column: 1 / -1;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, 0.06);
+        }
+
+
+        .no-products h2 {
+            margin-bottom: 10px;
+        }
+
+
+        .no-products p {
+            color: #6b7280;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .products {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+
+            .logo {
+                font-size: 20px;
+            }
+
+
+            .cart-btn {
+                padding: 8px 12px;
+
+                font-size: 14px;
+            }
+
+
+            .container {
+                width: 92%;
+
+                margin: 25px auto;
+            }
+
+
+            .page-heading h1 {
+                font-size: 27px;
+            }
+
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+
+            .search-form {
+                flex-direction: column;
+            }
+
+
+            .search-form input,
+            .search-form select,
+            .search-form button {
+                width: 100%;
+            }
+
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: white;
+            color: black;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .back-btn:hover {
+            background: #e11d48;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+     HEADER
+========================= -->
+
+    <header>
+
+        <div class="logo">
+            🏍️ Bike Spare Parts
+        </div>
+
+        <a href="{% url 'home' %}" class="back-btn">  Back </a>
+        <a href="{% url 'cart' %}" class="cart-btn">
+            🛒 View Cart
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+        MAIN
+    ========================= -->
+
+    <div class="container">
+
+
+        <div class="page-heading">
+
+            <h1>
+                Bike Spare Parts
+            </h1>
+
+            <p>
+                Find quality spare parts for your bike
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+            SEARCH
+        ========================= -->
+
+        <div class="search-section">
+
+            <form method="GET" class="search-form">
+
+                <input type="text" name="search" placeholder="Search spare parts..." value="{{ search|default:'' }}">
+
+
+                <select name="bike_model">
+
+                    <option value="">
+                        All Bike Models
+                    </option>
+
+
+                    {% for bike in bike_models %}
+
+                    <option value="{{ bike }}" {% if selected_bike == bike %} selected {% endif %}>
+
+                        {{ bike }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <button type="submit">
+                    🔍 Search
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- =========================
+            PRODUCTS
+        ========================= -->
+
+        <div class="products">
+
+
+            {% for product in products %}
+
+
+            <div class="product-card">
+
+
+                <!-- IMAGE -->
+
+                <div class="product-image">
+
+                    {% if product.image %}
+
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+                    {% else %}
+
+                    <span>
+                        No Image Available
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="product-info">
+
+
+                    <h2>
+                        {{ product.name }}
+                    </h2>
+
+
+                    <p class="description">
+
+                        {{ product.description }}
+
+                    </p>
+
+
+                    <span class="bike-model">
+
+                        🏍️ {{ product.bike_model }}
+
+                    </span>
+
+
+                    <p class="price">
+
+                        ₹{{ product.price }}
+
+                    </p>
+
+
+                    {% if product.stock > 0 %}
+
+                    <p class="stock available">
+
+                        ✓ {{ product.stock }}
+                        items available
+
+                    </p>
+
+
+                    <a href="{% url 'add_to_cart' product.id %}" class="add-cart">
+
+                        🛒 Add to Cart
+
+                    </a>
+
+
+                    {% else %}
+
+                    <p class="stock unavailable">
+
+                        ✕ Out of Stock
+
+                    </p>
+
+
+                    <span class="disabled-btn">
+
+                        Out of Stock
+
+                    </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+            <div class="no-products">
+
+                <h2>
+                    No Products Found
+                </h2>
+
+                <p>
+                    Try searching for a different spare part
+                    or bike model.
+                </p>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+    <a href="{% url 'home' %}" class="back-btn"> ← Back </a>
+
+
+</body>
+
+</html>

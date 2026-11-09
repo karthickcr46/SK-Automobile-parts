@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #172033;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #111827;
+            color: white;
+
+            min-height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 45px 25px 60px;
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 500;
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            color: #7c828c;
+            font-size: 19px;
+            margin: 0 0 35px;
+        }
+
+        /* =========================
+           ORDER CARD
+        ========================= */
+
+        .order-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            border: 1px solid #e1e3e7;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.05);
+
+            margin-bottom: 25px;
+        }
+
+        .order-header {
+            padding: 30px 35px 25px;
+        }
+
+        .order-number {
+            font-size: 25px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .order-date {
+            color: #7c828c;
+            font-size: 17px;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 11px 20px;
+
+            border-radius: 30px;
+
+            background: #f5efff;
+            color: #7138c8;
+
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .status.pending {
+            background: #fff8e8;
+            color: #a86b00;
+        }
+
+        .status.confirmed {
+            background: #effaf3;
+            color: #168346;
+        }
+
+        .status.shipped {
+            background: #eef5ff;
+            color: #2864e8;
+        }
+
+        .status.delivered {
+            background: #effaf3;
+            color: #168346;
+        }
+
+        .status.cancelled {
+            background: #fff0f0;
+            color: #c62828;
+        }
+
+        /* =========================
+           ORDER INFO
+        ========================= */
+
+        .order-info {
+            border-top: 1px solid #e5e7eb;
+
+            padding: 25px 35px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .info-label {
+            color: #7c828c;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .info-value {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        /* =========================
+           BUTTON AREA
+        ========================= */
+
+        .order-actions {
+            padding: 0 35px 30px;
+        }
+
+        .view-button {
+            display: block;
+
+            width: 100%;
+
+            padding: 17px;
+
+            background: #111827;
+            color: white;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-size: 18px;
+            font-weight: 600;
+
+            margin-bottom: 12px;
+        }
+
+        .view-button:hover {
+            background: #1f2937;
+        }
+
+        .track-button {
+            display: block;
+
+            width: 100%;
+
+            padding: 16px;
+
+            background: white;
+            color: #111827;
+
+            border: 1px solid #d5d8de;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .track-button:hover {
+            background: #f5f6f8;
+        }
+
+        /* =========================
+           EMPTY ORDERS
+        ========================= */
+
+        .empty-card {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 55px 25px;
+
+            text-align: center;
+
+            border: 1px solid #e1e3e7;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .empty-card h2 {
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .empty-card p {
+            color: #7c828c;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .shop-button {
+            display: inline-block;
+
+            background: #111827;
+            color: white;
+
+            padding: 15px 30px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                min-height: 100px;
+                padding: 15px 20px;
+
+                align-items: center;
+            }
+
+            .logo {
+                font-size: 25px;
+                max-width: 220px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 50px 20px 50px;
+            }
+
+            .page-title {
+                font-size: 40px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+                line-height: 1.5;
+            }
+
+            .order-header {
+                padding: 28px 25px 24px;
+            }
+
+            .order-number {
+                font-size: 22px;
+            }
+
+            .order-date {
+                font-size: 16px;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr 1fr;
+
+                padding: 25px;
+
+                gap: 25px 15px;
+            }
+
+            .info-value {
+                font-size: 18px;
+            }
+
+            .order-actions {
+                padding: 0 25px 28px;
+            }
+
+        }
+
+        @media (max-width: 450px) {
+
+            .navbar {
+                min-height: 100px;
+            }
+
+            .logo {
+                font-size: 23px;
+                line-height: 1.15;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 45px 20px;
+            }
+
+            .page-title {
+                font-size: 38px;
+            }
+
+            .order-card {
+                border-radius: 18px;
+            }
+
+            .order-header {
+                padding: 27px 25px;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .info-label {
+                font-size: 15px;
+            }
+
+            .info-value {
+                font-size: 18px;
+            }
+
+            .view-button,
+            .track-button {
+                font-size: 17px;
+            }
+
+        }
+
+        .track-button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: #111827;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 25px;
+        }
+
+        .track-button:hover {
+            background: #1f2937;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        SK Automobile Parts
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Back
+        </a>
+
+        <a href="{% url 'products' %}">
+            Shop
+        </a>
+
+        <a href="{% url 'cart' %}">
+            Cart
+        </a>
+
+        <a href="{% url 'logout_customer' %}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+    <h1 class="page-title">
+        My Orders
+    </h1>
+
+    <p class="subtitle">
+        View and track all your SK Automobile Parts orders.
+    </p>
+
+
+    {% if orders %}
+
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+
+            <!-- =========================
+                 ORDER HEADER
+            ========================= -->
+
+            <div class="order-header">
+
+                <div class="order-number">
+
+                    Order #SK{{ order.id }}
+
+                </div>
+
+
+                <div class="order-date">
+
+                    Placed on
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+
+                </div>
+
+
+                <!-- ORDER STATUS -->
+
+                {% if order.order_status == "PENDING" %}
+
+                    <span class="status pending">
+                        {{ order.get_order_status_display }}
+                    </span>
+
+                {% elif order.order_status == "CONFIRMED" %}
+
+                    <span class="status confirmed">
+                        {{ order.get_order_status_display }}
+                    </span>
+
+                {% elif order.order_status == "SHIPPED" %}
+
+                    <span class="status shipped">
+                        🚚 {{ order.get_order_status_display }}
+                    </span>
+
+                {% elif order.order_status == "DELIVERED" %}
+
+                    <span class="status delivered">
+                        ✓ {{ order.get_order_status_display }}
+                    </span>
+
+                {% elif order.order_status == "CANCELLED" %}
+
+                    <span class="status cancelled">
+                        {{ order.get_order_status_display }}
+                    </span>
+
+                {% else %}
+
+                    <span class="status">
+                        {{ order.get_order_status_display }}
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =========================
+                 ORDER INFORMATION
+            ========================= -->
+
+            <div class="order-info">
+
+
+                <!-- TOTAL -->
+
+                <div>
+
+                    <div class="info-label">
+                        Total Amount
+                    </div>
+
+                    <div class="info-value">
+                        ₹{{ order.total_amount }}
+                    </div>
+
+                </div>
+
+
+                <!-- ITEMS -->
+
+                <div>
+
+                    <div class="info-label">
+                        Items
+                    </div>
+
+                    <div class="info-value">
+
+                        {{ order.items.all|length }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div>
+
+                    <div class="info-label">
+                        Payment
+                    </div>
+
+                    <div class="info-value">
+
+                        {{ order.get_payment_method_display }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 ACTIONS
+            ========================= -->
+
+            <div class="order-actions">
+
+
+                <!-- VIEW ORDER -->
+
+                <a
+                   
+                    href="{% url 'track_order' order.id %}"
+                    class="view-button"
+                >
+                    View Order
+                </a>
+
+
+                <!-- LIVE TRACKING -->
+
+                {% if order.order_status == "SHIPPED" %}
+
+                    <a
+                        href="{% url 'track_order' order.id %}"
+                        class="track-button"
+                    >
+                        🚚 Track Live Delivery
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- =========================
+             NO ORDERS
+        ========================= -->
+
+        <div class="empty-card">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h2>
+                No Orders Yet
+            </h2>
+
+            <p>
+                You haven't placed any orders yet.
+            </p>
+
+            <a
+                href="{% url 'products' %}"
+                class="shop-button"
+            >
+                Start Shopping
+            </a>
+
+        </div>
+        <a
+            href="{% url 'track_order' order.id %}"
+            class="track-button">
+        🚚 Track Live Delivery
+        a>
+
+
+    {% endif %}
+
+</main>
+
+
+</body>
+
+</html>

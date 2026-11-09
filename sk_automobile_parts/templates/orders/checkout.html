@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #172033;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #111827;
+            color: white;
+            min-height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 25px 60px;
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 500;
+            margin: 0 0 35px;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 38px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 30px;
+            font-weight: 500;
+            margin: 0 0 30px;
+        }
+
+        /* =========================
+           DELIVERY DETAILS
+        ========================= */
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid #d5d7db;
+            border-radius: 12px;
+            padding: 17px 20px;
+            font-size: 17px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .form-group input {
+            height: 62px;
+        }
+
+        .form-group textarea {
+            min-height: 170px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2864e8;
+            box-shadow: 0 0 0 3px rgba(40, 100, 232, 0.10);
+        }
+
+        /* =========================
+           PAYMENT
+        ========================= */
+
+        .payment-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            flex: 1;
+            min-width: 130px;
+            border: 1px solid #d5d7db;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .payment-option input {
+            margin-right: 7px;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .continue-btn {
+            width: 100%;
+            height: 65px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #111827;
+            color: white;
+
+            font-size: 19px;
+            font-weight: 600;
+
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .continue-btn:hover {
+            background: #1f2937;
+        }
+
+        .back-cart {
+            display: block;
+            margin-top: 25px;
+
+            color: #5f6672;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* =========================
+           ORDER SUMMARY
+        ========================= */
+
+        .summary-card {
+            position: sticky;
+            top: 20px;
+        }
+
+        .product {
+            padding: 18px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .product-info {
+            color: #777f89;
+            font-size: 15px;
+        }
+
+        .product-price {
+            margin-top: 8px;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .total-row {
+            border-top: 1px solid #ddd;
+            margin-top: 15px;
+            padding-top: 20px;
+
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error {
+            background: #fff0f0;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                padding: 0 22px;
+                min-height: 68px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .nav-links a {
+                font-size: 17px;
+            }
+
+            .container {
+                padding: 55px 20px 40px;
+            }
+
+            .page-title {
+                font-size: 42px;
+                margin-bottom: 35px;
+            }
+
+            .checkout-layout {
+                display: block;
+            }
+
+            .card {
+                padding: 30px 25px;
+                border-radius: 20px;
+            }
+
+            .card h2 {
+                font-size: 30px;
+            }
+
+            .summary-card {
+                position: static;
+            }
+
+            .form-group label {
+                font-size: 18px;
+            }
+
+            .form-group input {
+                height: 62px;
+            }
+
+            .form-group textarea {
+                min-height: 185px;
+            }
+
+            .continue-btn {
+                height: 65px;
+                font-size: 19px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 55px 20px 40px;
+            }
+
+            .page-title {
+                font-size: 40px;
+            }
+
+            .card {
+                padding: 32px 25px;
+            }
+
+            .card h2 {
+                font-size: 29px;
+            }
+
+            .payment-options {
+                display: block;
+            }
+
+            .payment-option {
+                margin-bottom: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        SK Automobile Parts
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'products' %}">
+            Shop
+        </a>
+
+        <a href="{% url 'cart' %}">
+            Cart
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+    <h1 class="page-title">
+        Checkout
+    </h1>
+
+
+    {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+    {% endif %}
+
+
+    <div class="checkout-layout">
+
+
+        <!-- =========================
+             LEFT SIDE
+        ========================= -->
+
+        <div>
+
+
+            <!-- DELIVERY DETAILS -->
+
+            <div class="card">
+
+                <h2>
+                    Delivery Details
+                </h2>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value="{{ customer.phone }}"
+                            placeholder="Enter your phone number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="Enter your complete delivery address"
+                            required
+                        >{{ customer.address }}</textarea>
+
+                    </div>
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="form-group">
+
+                        <div class="payment-title">
+                            Payment Method
+                        </div>
+
+
+                        <div class="payment-options">
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="COD"
+                                    checked
+                                >
+
+                                Cash on Delivery
+
+                            </label>
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="ONLINE"
+                                >
+
+                                Online Payment
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="continue-btn"
+                    >
+                        Continue to Payment
+                    </button>
+
+
+                </form>
+
+
+                <a
+                    href="{% url 'cart' %}"
+                    class="back-cart"
+                >
+                    ← Back to Cart
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             RIGHT SIDE
+        ========================= -->
+
+        <div>
+
+
+            <div class="card summary-card">
+
+                <h2>
+                    Order Summary
+                </h2>
+
+
+                {% for item in items %}
+
+                    <div class="product">
+
+                        <div class="product-name">
+                            {{ item.product.name }}
+                        </div>
+
+                        <div class="product-info">
+                            Quantity: {{ item.quantity }}
+                        </div>
+
+                        <div class="product-price">
+                            ₹{{ item.total_price }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span>
+                        ₹{{ total }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOMER INFORMATION -->
+
+            <div class="card">
+
+                <h2>
+                    Customer
+                </h2>
+
+                <p>
+                    <strong>Name</strong><br>
+                    {{ customer.name }}
+                </p>
+
+                <p>
+                    <strong>Email</strong><br>
+                    {{ customer.email }}
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

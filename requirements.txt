@@ -1,0 +1,6 @@
+django
+numpy
+pandas
+Pillow
+djangorestframework
+django-jazzmin

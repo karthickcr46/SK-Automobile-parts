@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Details | SK Automobile Parts</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .detail {
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .detail:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .address {
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 13px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            background: #111827;
+            color: white;
+        }
+
+        .products-btn {
+            background: #e11d48;
+            color: white;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>My Details</h1>
+
+        <p class="subtitle">
+            Your saved customer information
+        </p>
+
+
+        <div class="detail">
+
+            <div class="label">
+                Name
+            </div>
+
+            <div class="value">
+                {{ customer.name }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                Phone
+            </div>
+
+            <div class="value">
+                {{ customer.phone }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                Email
+            </div>
+
+            <div class="value">
+                {{ customer.email }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                Address
+            </div>
+
+            <div class="value address">
+                {{ customer.address }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                City
+            </div>
+
+            <div class="value">
+                {{ customer.city }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                State
+            </div>
+
+            <div class="value">
+                {{ customer.state }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                Pincode
+            </div>
+
+            <div class="value">
+                {{ customer.pincode }}
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a href="{% url 'home' %}"
+               class="btn home-btn">
+                 Home
+            </a>
+
+            <a href="{% url 'products' %}"
+               class="btn products-btn">
+                Shop Spare Parts
+            </a>
+
+            <a href="{% url 'logout_customer' %}"
+               class="btn logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
+
